@@ -5,8 +5,26 @@ company: "QBurst Technologies"
 date: "Sep 2019 - Dec 2021"
 preview_link: "https://osmosislearn.com"
 tech:
-  - "SaaS"
-description: "A SaaS learning platform for global learners to contribute and continue their learning journey with interactive sessions, webinars, resources, and user or group invites."
-roles: []
-achievements: []
+  - "CodeIgniter"
+  - "Flutter"
+  - "Git"
+  - "Laravel"
+  - "MySQL"
+  - "Node.js"
+  - "PHP"
+  - "Vue.js"
+description: "A SaaS learning platform for global learners to contribute and continue their learning journey through interactive sessions, webinars, and learning resources such as files and links. It supports user and group invitations, along with courses, quizzes, and assets. The platform is currently available for institutions and organizations in Singapore."
+roles:
+  - "Spearheaded the development team."
+  - "Introduced and implemented new features and product changes."
+  - "Integrated third-party tools, packages, and libraries."
+  - "Designed database models and platform architecture."
+  - "Developed REST APIs in Laravel and AWS Lambda using Node.js."
+  - "Maintained servers and project dependencies."
+  - "Managed product releases."
+  - "Led feature discussions and technical brainstorming."
+  - "Handled and maintained AWS services."
+achievements:
+  - "Successfully launched the platform and generated first-year revenue."
+  - "Onboarded 3 to 4 institutional clients within the first year."
 ---
