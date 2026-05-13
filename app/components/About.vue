@@ -43,9 +43,9 @@
 </template>
 
 <script setup>
-const { data: user } = await useAsyncData("user", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-about", () => queryCollection("user").first())
 const { data: experiences } = await useAsyncData("experiences", () =>
-  queryCollection("experiences").order("id", "DESC").all()
+  queryCollection("experiences").all()
 )
 </script>
 
@@ -57,12 +57,6 @@ const { data: experiences } = await useAsyncData("experiences", () =>
 .section-block {
   margin-bottom: 4rem;
   max-width: 800px;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-heading);
 }
 
 .about-text {
@@ -93,13 +87,13 @@ const { data: experiences } = await useAsyncData("experiences", () =>
   font-size: 0.75rem;
   font-weight: 600;
   background: #d7ffe0;
-  color: #018e42;
+  color: #0f5e2c;
   /* Default for Internship */
 }
 
 .badge.full-time {
   background: #d7ffe0;
-  color: #018e42;
+  color: #0f5e2c;
 }
 
 .timeline-meta {

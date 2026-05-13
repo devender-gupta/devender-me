@@ -15,20 +15,9 @@ const { data: projects } = await useAsyncData("projects", () =>
   queryCollection("projects").order("id", "DESC").all()
 )
 </script>
-<style>
+<style scoped>
 .projects-section {
   padding: 80px 0;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.section-subtitle {
-  font-size: 1.5rem;
-  color: #a7a7a7;
-  margin-bottom: 50px;
 }
 
 .projects-grid {
@@ -47,11 +36,6 @@ const { data: projects } = await useAsyncData("projects", () =>
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero {
-    flex-direction: column;
-    text-align: center;
   }
 }
 </style>

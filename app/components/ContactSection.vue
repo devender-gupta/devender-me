@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-const { data: user } = await useAsyncData("user-footer", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-contact", () => queryCollection("user").first())
 </script>
 
 <style scoped>

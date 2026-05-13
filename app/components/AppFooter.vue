@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="container footer-content">
+    <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
           <NuxtLink to="/#home" class="logo">
@@ -12,12 +12,12 @@
         </div>
 
         <div class="footer-info">
-          <a v-if="user?.phone" :href="`tel:${user.phone.replace(/\s+/g, '')}`" class="info-link">{{
-            user.phone
-          }}</a>
-          <a v-if="user?.email" :href="`mailto:${user.email}`" class="info-link">{{
-            user.email
-          }}</a>
+          <a v-if="user?.phone" :href="`tel:${user.phone.replace(/\s+/g, '')}`" class="info-link">
+            {{ user.phone }}
+          </a>
+          <a v-if="user?.email" :href="`mailto:${user.email}`" class="info-link">
+            {{ user.email }}
+          </a>
 
           <div class="footer-socials">
             <a
@@ -154,20 +154,6 @@ const userNameSecondPart = computed(() => userNameParts.value[1] || "")
   color: var(--primary-accent);
 }
 
-.copyright {
-  font-size: 0.85rem;
-  color: #a7a7a7;
-}
-
-.heart {
-  color: #e70faa;
-}
-
-.coffee {
-  color: #cb997e;
-}
-
-/* Responsive Adjustments */
 @media (max-width: 992px) {
   .footer-top {
     flex-direction: column;

@@ -26,7 +26,7 @@
   </header>
 </template>
 <script setup>
-const { data: user } = await useAsyncData("user", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-header", () => queryCollection("user").first())
 
 const userNameParts = computed(() => {
   const username = user.value?.brand_username || ""
@@ -84,10 +84,5 @@ const userNameSecondPart = computed(() => {
   transform: translateY(-3px);
   color: var(--primary-accent);
   opacity: 0.8;
-}
-
-.icon-img {
-  width: 30px;
-  height: 30px;
 }
 </style>

@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-const { data: user } = await useAsyncData("user", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-hero", () => queryCollection("user").first())
 </script>
 
 <style scoped>

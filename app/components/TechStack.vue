@@ -14,24 +14,13 @@
 </template>
 
 <script setup>
-const { data: user } = await useAsyncData("user", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-tech", () => queryCollection("user").first())
 const techData = computed(() => user.value?.tech_stack || [])
 </script>
 
 <style scoped>
 .tech-section {
   padding: 80px 0;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.section-subtitle {
-  font-size: 1.5rem;
-  color: #a7a7a7;
-  margin-bottom: 50px;
 }
 
 .tech-grid {
