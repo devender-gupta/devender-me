@@ -1,10 +1,10 @@
-import { defineContentConfig, defineCollection, z } from "@nuxt/content";
+import { defineContentConfig, defineCollection, z } from "@nuxt/content"
 
 export default defineContentConfig({
   collections: {
     content: defineCollection({
       type: "page",
-      source: "**",
+      source: "**"
     }),
     projects: defineCollection({
       type: "page",
@@ -17,8 +17,8 @@ export default defineContentConfig({
         tech: z.array(z.string()),
         description: z.string(),
         roles: z.array(z.string()),
-        achievements: z.array(z.string()),
-      }),
+        achievements: z.array(z.string())
+      })
     }),
     user: defineCollection({
       type: "page",
@@ -37,11 +37,11 @@ export default defineContentConfig({
           .array(
             z.object({
               name: z.string(),
-              icon: z.string(),
-            }),
+              icon: z.string()
+            })
           )
-          .optional(),
-      }),
-    }),
-  },
-});
+          .optional()
+      })
+    })
+  }
+})

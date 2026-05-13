@@ -1,18 +1,36 @@
 {
-  "name": "portfolio-nuxt",
+  "name": "devender-me",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "prepare": "husky",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@nuxt/content": "^3.13.0",
+    "@nuxt/eslint": "^1.15.2",
     "@nuxt/icon": "^2.2.2",
     "@nuxt/image": "^2.0.0",
     "better-sqlite3": "^12.10.0",
+    "eslint": "^10.3.0",
     "nuxt": "^4.4.4"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.4",
+    "prettier": "^3.8.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,json,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

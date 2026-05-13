@@ -1,19 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image"],
+  modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint"],
   devtools: { enabled: true },
   future: {
-    compatibilityVersion: 4,
+    compatibilityVersion: 4
   },
   compatibilityDate: "2026-05-13",
   vite: {
     optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit"],
-    },
+      include: ["@vue/devtools-core", "@vue/devtools-kit"]
+    }
   },
   icon: {
     mode: "css",
-    cssLayer: "base",
-  },
-});
+    cssLayer: "base"
+  }
+})
