@@ -7,7 +7,7 @@
             <span class="brackets">{</span>
             <span class="gradient-text">{{ userNameFirstPart }}</span>
             <span class="brackets">}</span>
-            <span class="name">{{ userNameSecondPart }}</span>
+            <span class="name-suffix">&nbsp;{{ userNameSecondPart }}</span>
           </NuxtLink>
         </div>
 
@@ -52,11 +52,6 @@
           <NuxtLink to="/#projects">Projects</NuxtLink>
           <NuxtLink to="/#contact">Contact</NuxtLink>
         </nav>
-
-        <p class="copyright">
-          Designed and built by <span class="gradient-text">{{ user?.name }}</span> with
-          <span class="heart">Love</span> & <span class="coffee">Coffee</span>
-        </p>
       </div>
     </div>
   </footer>

@@ -5,7 +5,7 @@
         <span class="brackets">{</span>
         <span class="gradient-text">{{ userNameFirstPart }}</span>
         <span class="brackets">}</span>
-        <span class="name-suffix">{{ userNameSecondPart }}</span>
+        <span class="name-suffix">&nbsp;{{ userNameSecondPart }}</span>
       </NuxtLink>
     </div>
     <nav class="nav-links">

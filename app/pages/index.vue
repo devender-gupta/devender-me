@@ -2,9 +2,6 @@
   <div>
     <section id="home" class="page-section">
       <AppHeader />
-    </section>
-
-    <section id="about" class="page-section">
       <AppHero />
     </section>
 
@@ -16,15 +13,16 @@
       <Project />
     </section>
 
+    <section id="about" class="page-section">
+      <About />
+    </section>
+
     <section id="contact" class="page-section">
+      <ContactSection />
       <AppFooter />
     </section>
   </div>
 </template>
-
-<script setup>
-import AppFooter from "~/components/AppFooter.vue"
-</script>
 
 <style scoped>
 .page-section {
@@ -38,6 +36,17 @@ import AppFooter from "~/components/AppFooter.vue"
 
 .section-heading h2 {
   font-size: 2.5rem;
+}
+
+.about-content {
+  padding: 4rem 0 2rem;
+}
+
+.about-text {
+  max-width: 800px;
+  color: #a7a7a7;
+  line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 .contact-section {

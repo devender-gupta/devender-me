@@ -8,6 +8,10 @@ summary: "Experienced Full Stack Developer with a strong background in building 
 brand_username: "devender-gupta"
 github_link: "https://github.com/devender-gupta"
 linkedin_link: "https://www.linkedin.com/in/devender-gupta"
+education:
+  - degree: "Bachelor in Computer Science"
+    institution: "Toc-H Institute of Science and Technology"
+    date: "2013 - 2017"
 tech_stack:
 - name: "Laravel"
     icon: "logos:laravel"

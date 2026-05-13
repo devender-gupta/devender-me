@@ -35,6 +35,13 @@ export default defineContentConfig({
         brand_username: z.string(),
         github_link: z.string().url(),
         linkedin_link: z.string().url(),
+        education: z.array(
+          z.object({
+            institution: z.string(),
+            degree: z.string(),
+            date: z.string()
+          })
+        ),
         tech_stack: z
           .array(
             z.object({
@@ -43,6 +50,18 @@ export default defineContentConfig({
             })
           )
           .optional()
+      })
+    }),
+    experiences: defineCollection({
+      type: "page",
+      source: "experiences/*.md",
+      schema: z.object({
+        id: z.string(),
+        company: z.string(),
+        position: z.string(),
+        date: z.string(),
+        location: z.string(),
+        type: z.string()
       })
     })
   }
