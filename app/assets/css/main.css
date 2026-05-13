@@ -1,0 +1,118 @@
+/* app/assets/css/main.css */
+
+:root {
+  /* Colors from your design */
+  --bg-dark: #191919;
+  --bg-white: #cccccc;
+  --card-bg: #363636;
+  --text-white: #cccccc;
+  --text-heading: #d9d9d9;
+  --primary-accent: #00c0ff; /* The blue/cyan in your name */
+  --secondary-accent: #e70faa; /* The pink in the name/gradient */
+
+  /* Typography */
+  --font-main: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Card Layout Logic */
+.project-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1.5rem;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-description {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #a7a7a7;
+  margin-bottom: 1rem;
+}
+
+.tech-stack-text {
+  font-size: 0.8rem;
+  color: var(--text-heading);
+}
+
+.project-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.project-links a {
+  color: #fff;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hero-text {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #13b0f5 0%, #e70faa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* For the circular image border */
+.profile-img-container {
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(to right, #00c0ff, #e70faa);
+  display: inline-block;
+}
+
+.profile-img {
+  border-radius: 50%;
+  border: 4px solid var(--bg-dark);
+  display: block;
+}
