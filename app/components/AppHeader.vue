@@ -9,11 +9,11 @@
       </NuxtLink>
     </div>
     <nav class="nav-links">
-      <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/about">About</NuxtLink>
-      <NuxtLink to="/tech">Tech Stack</NuxtLink>
-      <NuxtLink to="/projects">Projects</NuxtLink>
-      <NuxtLink to="/contact">Contact</NuxtLink>
+      <NuxtLink to="/#home">Home</NuxtLink>
+      <NuxtLink to="/#about">About</NuxtLink>
+      <NuxtLink to="/#tech">Tech Stack</NuxtLink>
+      <NuxtLink to="/#projects">Projects</NuxtLink>
+      <NuxtLink to="/#contact">Contact</NuxtLink>
     </nav>
     <div class="social-icons">
       <a class="social-link" :href="user.github_link" target="_blank" rel="noopener noreferrer">

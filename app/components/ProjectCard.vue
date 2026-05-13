@@ -7,7 +7,7 @@
         class="project-image"
         loading="lazy"
       />
-      <div class="image-overlay"/>
+      <div class="image-overlay" />
     </div>
 
     <div class="project-content">
