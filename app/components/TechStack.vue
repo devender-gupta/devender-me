@@ -29,6 +29,7 @@ const techData = computed(() => user.value?.tech_stack || [])
 }
 
 .section-subtitle {
+  font-size: 1.5rem;
   color: #a7a7a7;
   margin-bottom: 50px;
 }

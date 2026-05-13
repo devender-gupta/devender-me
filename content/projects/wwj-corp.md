@@ -1,8 +1,8 @@
 ---
-id: "1"
+id: "7"
 title: "WWJ Corp. Software Engineering"
 company: "QBurst Technologies"
-date: "May 2024 - Present"
+date: "May 2024 - Jan 2026"
 tech:
   - "Docker"
   - "Flutter"

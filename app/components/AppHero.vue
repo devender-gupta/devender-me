@@ -50,7 +50,7 @@ const { data: user } = await useAsyncData("user", () => queryCollection("user").
   align-items: center;
   justify-content: center;
   /* colorful gradient ring from your design */
-  background: linear-gradient(180deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  background: linear-gradient(180deg, var(--secondary-accent) 0%, var(--primary-accent) 100%);
   border-radius: 50%;
   width: 350px;
   height: 350px;

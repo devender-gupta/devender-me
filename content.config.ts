@@ -14,6 +14,8 @@ export default defineContentConfig({
         title: z.string(),
         company: z.string(),
         date: z.string(),
+        repo_link: z.string().url().optional(),
+        preview_link: z.string().url().optional(),
         tech: z.array(z.string()),
         description: z.string(),
         roles: z.array(z.string()),
