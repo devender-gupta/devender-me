@@ -1,88 +1,128 @@
 <template>
-  <header class="header container">
-    <div class="logo">
+  <header class="header">
+    <nav class="container nav-wrapper">
       <NuxtLink to="/" class="logo-link">
-        <span class="brackets">{</span>
-        <span class="gradient-text">{{ userNameFirstPart }}</span>
-        <span class="brackets">}</span>
-        <span class="name-suffix">&nbsp;{{ userNameSecondPart }}</span>
+        <div class="logo">
+          <span class="brackets">{</span>
+          <span class="gradient-text">{{ userNameFirstPart }}</span>
+          <span class="brackets">}</span>
+          <span class="name">{{ userNameSecondPart }}</span>
+        </div>
       </NuxtLink>
-    </div>
-    <nav class="nav-links">
-      <NuxtLink to="/#home">Home</NuxtLink>
-      <NuxtLink to="/#about">About</NuxtLink>
-      <NuxtLink to="/#tech">Tech Stack</NuxtLink>
-      <NuxtLink to="/#projects">Projects</NuxtLink>
-      <NuxtLink to="/#contact">Contact</NuxtLink>
+
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#tech" class="nav-link">Tech Stack</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="header-socials">
+        <a
+          v-if="user?.github_link"
+          :href="user.github_link"
+          target="_blank"
+          aria-label="GitHub"
+          rel="noopener noreferrer"
+        >
+          <AppIcon name="uil:github" />
+        </a>
+        <a
+          v-if="user?.linkedin_link"
+          :href="user.linkedin_link"
+          target="_blank"
+          aria-label="LinkedIn"
+          rel="noopener noreferrer"
+        >
+          <AppIcon name="uil:linkedin" />
+        </a>
+      </div>
     </nav>
-    <div class="social-icons">
-      <a class="social-link" :href="user.github_link" target="_blank" rel="noopener noreferrer">
-        <AppIcon name="uil:github" :size="30" />
-      </a>
-      <a class="social-link" :href="user.linkedin_link" target="_blank" rel="noopener noreferrer">
-        <AppIcon name="uil:linkedin" :size="30" />
-      </a>
-    </div>
   </header>
 </template>
+
 <script setup>
-const { data: user } = await useAsyncData("user-header", () => queryCollection("user").first())
+const { data: user } = await useAsyncData("user-footer", () => queryCollection("user").first())
 
 const userNameParts = computed(() => {
   const username = user.value?.brand_username || ""
   return username ? username.split("-") : []
 })
 
-const userNameFirstPart = computed(() => {
-  return userNameParts.value[0] || ""
-})
-
-const userNameSecondPart = computed(() => {
-  return userNameParts.value[1] || ""
-})
+const userNameFirstPart = computed(() => userNameParts.value[0] || "")
+const userNameSecondPart = computed(() => userNameParts.value[1] || "")
 </script>
 
 <style scoped>
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(25, 25, 25, 0.8);
+  /* Glassmorphism effect */
+  backdrop-filter: blur(10px);
+  padding: 1.5rem 0;
+}
+
+.nav-wrapper {
   display: flex;
   justify-content: space-between;
+  /* This is the secret sauce */
   align-items: center;
-  padding: 2rem 0;
 }
 
+/* Nav links styling */
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
+.nav-link {
+  color: #a7a7a7;
   text-decoration: none;
-  color: var(--text-white);
   font-weight: 500;
-  transition: color 0.3s;
+  font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
-  color: var(--primary-accent);
+.nav-link:hover {
+  color: #fff;
 }
 
-.social-icons {
+/* Logo styling */
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Social icons styling */
+.header-socials {
   display: flex;
   gap: 1.2rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
-.social-link {
-  display: inline-flex;
-  color: var(--text-white);
+.header-socials a {
+  color: #a7a7a7;
   transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+    color 0.3s,
+    transform 0.3s;
 }
 
-.social-link:hover {
-  transform: translateY(-3px);
-  color: var(--primary-accent);
-  opacity: 0.8;
+.header-socials a:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive: Hide nav on mobile or change to hamburger */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    /* You can implement a mobile menu later */
+  }
 }
 </style>

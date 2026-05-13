@@ -25,6 +25,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 h1,
@@ -59,4 +60,52 @@ h3 {
 
 .text-center {
   text-align: center;
+}
+
+/* Base Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: none;
+  gap: 8px; /* Space for icons */
+}
+
+/* Primary: The Gradient Look */
+.btn-primary {
+  background: linear-gradient(90deg, #13b0f5, #e70faa);
+  color: white;
+  box-shadow: 0 4px 15px rgba(19, 176, 245, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 15, 170, 0.4);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary: The Glass/Outline Look */
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 1.5px solid #fff;
+  opacity: 0.8;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+  border-color: #13b0f5;
+  color: #13b0f5;
 }

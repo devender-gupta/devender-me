@@ -35,6 +35,7 @@ export default defineContentConfig({
         brand_username: z.string(),
         github_link: z.string().url(),
         linkedin_link: z.string().url(),
+        resume_link: z.string().url().optional(),
         education: z.array(
           z.object({
             institution: z.string(),

@@ -3,6 +3,14 @@
     <section class="section-block">
       <h2 class="section-title">About Me</h2>
       <p class="about-text">{{ user.summary }}</p>
+      <a
+        v-if="user.resume_link"
+        :href="user.resume_link"
+        class="btn btn-primary"
+        download
+        target="__blank"
+        >Download CV</a
+      >
     </section>
 
     <section class="section-block">
