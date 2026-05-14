@@ -4,14 +4,16 @@
       <NuxtLink to="/" class="logo-link">
         <div class="logo">
           <span class="brackets">{</span>
-          <span class="gradient-text">{{ userNameFirstPart }}</span>
+          <span class="gradient-text">{{ user.brand.first }}</span>
           <span class="brackets">}</span>
-          <span class="name">{{ userNameSecondPart }}</span>
+          <span class="name">&nbsp;{{ user.brand.last }}</span>
         </div>
       </NuxtLink>
 
       <ul class="nav-links">
-        <li><a href="#home" class="nav-link">Home</a></li>
+        <NuxtLink to="/#home" class="nav-link" :class="{ active: activeSection === 'home' }">
+          Home
+        </NuxtLink>
         <li><a href="#tech" class="nav-link">Tech Stack</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
@@ -43,15 +45,7 @@
 </template>
 
 <script setup>
-const { data: user } = await useAsyncData("user-footer", () => queryCollection("user").first())
-
-const userNameParts = computed(() => {
-  const username = user.value?.brand_username || ""
-  return username ? username.split("-") : []
-})
-
-const userNameFirstPart = computed(() => userNameParts.value[0] || "")
-const userNameSecondPart = computed(() => userNameParts.value[1] || "")
+const { data: user } = await useAsyncData("user-header", () => queryCollection("user").first())
 </script>
 
 <style scoped>

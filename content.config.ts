@@ -32,7 +32,10 @@ export default defineContentConfig({
         designation: z.string(),
         introduction: z.string(),
         summary: z.string(),
-        brand_username: z.string(),
+        brand: z.object({
+          first: z.string(),
+          last: z.string()
+        }),
         github_link: z.string().url(),
         linkedin_link: z.string().url(),
         resume_link: z.string().url().optional(),

@@ -22,7 +22,7 @@ export default defineNuxtConfig({
           property: "og:description",
           content: "Explore the projects and technical expertise of Devender Gupta."
         },
-        { property: "og:image", content: "/og-preview.jpg" } // The preview image
+        { property: "og:image", content: "/og-preview.png" } // The preview image
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },

@@ -70,14 +70,18 @@ defineProps({
   /* Slightly lighter than pure black */
   border-radius: 16px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 650px;
+
+  /* height: 650px; */
   /* Fixed height for all cards to ensure consistency */
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition:
     transform 0.3s ease,
     border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* Let the grid handle the height */
+  min-height: 600px;
 }
 
 .project-card:hover {

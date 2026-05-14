@@ -6,9 +6,9 @@
       <a
         v-if="user.resume_link"
         :href="user.resume_link"
-        class="btn btn-primary"
+        class="btn btn-primary resume-button"
         download
-        target="__blank"
+        target="_blank"
         >Download CV</a
       >
     </section>
@@ -53,7 +53,7 @@
 <script setup>
 const { data: user } = await useAsyncData("user-about", () => queryCollection("user").first())
 const { data: experiences } = await useAsyncData("experiences", () =>
-  queryCollection("experiences").all()
+  queryCollection("experiences").order("id", "DESC").all()
 )
 </script>
 
@@ -115,5 +115,9 @@ const { data: experiences } = await useAsyncData("experiences", () =>
 .divider {
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resume-button {
+  margin-top: 2rem;
 }
 </style>

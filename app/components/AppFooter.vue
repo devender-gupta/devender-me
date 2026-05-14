@@ -5,9 +5,9 @@
         <div class="footer-brand">
           <NuxtLink to="/#home" class="logo">
             <span class="brackets">{</span>
-            <span class="gradient-text">{{ userNameFirstPart }}</span>
+            <span class="gradient-text">{{ user.brand.first }}</span>
             <span class="brackets">}</span>
-            <span class="name-suffix">&nbsp;{{ userNameSecondPart }}</span>
+            <span class="name-suffix">&nbsp;{{ user.brand.last }}</span>
           </NuxtLink>
         </div>
 
@@ -47,9 +47,9 @@
       <div class="footer-bottom">
         <nav class="footer-nav">
           <NuxtLink to="/#home">Home</NuxtLink>
-          <NuxtLink to="/#about">About</NuxtLink>
-          <NuxtLink to="/#tech">Technologies</NuxtLink>
+          <NuxtLink to="/#tech">Tech Stack</NuxtLink>
           <NuxtLink to="/#projects">Projects</NuxtLink>
+          <NuxtLink to="/#about">About</NuxtLink>
           <NuxtLink to="/#contact">Contact</NuxtLink>
         </nav>
       </div>
@@ -59,14 +59,6 @@
 
 <script setup>
 const { data: user } = await useAsyncData("user-footer", () => queryCollection("user").first())
-
-const userNameParts = computed(() => {
-  const username = user.value?.brand_username || ""
-  return username ? username.split("-") : []
-})
-
-const userNameFirstPart = computed(() => userNameParts.value[0] || "")
-const userNameSecondPart = computed(() => userNameParts.value[1] || "")
 </script>
 
 <style scoped>
