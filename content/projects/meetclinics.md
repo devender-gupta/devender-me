@@ -17,4 +17,5 @@ roles:
   - "Implemented resource management features in the super admin panel."
   - "Deployed source-code changes and handled AWS services."
 achievements: []
+display: "true"
 ---

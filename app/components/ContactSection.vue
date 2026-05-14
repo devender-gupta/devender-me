@@ -15,37 +15,36 @@ const { data: user } = await useAsyncData("user-contact", () => queryCollection(
 
 <style scoped>
 .contact-section {
-  padding: 10rem 0.5rem;
+  padding-block: var(--space-40);
   text-align: center;
 }
 
-@media screen {
-  .contact-section {
-    padding: 10rem 0;
-    text-align: center;
-  }
-}
-
 .contact-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: var(--text-heading);
-  margin-bottom: 1rem;
-  letter-spacing: -1px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-heading);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.04em;
 }
 
 .contact-email {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-extrabold);
   text-decoration: none;
   display: block;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .contact-title,
   .contact-email {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    /* Forces a smaller size on mobile */
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding-block: var(--space-24);
   }
 }
 </style>

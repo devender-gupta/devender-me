@@ -14,4 +14,5 @@ roles:
   - "Created scripts to automate core platform workflows."
 achievements:
   - "Delivered multiple automation scripts that reduced manual operational effort."
+display: "false"
 ---

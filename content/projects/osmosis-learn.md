@@ -27,4 +27,5 @@ roles:
 achievements:
   - "Successfully launched the platform and generated first-year revenue."
   - "Onboarded 3 to 4 institutional clients within the first year."
+display: "true"
 ---

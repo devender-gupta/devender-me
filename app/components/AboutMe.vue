@@ -4,8 +4,7 @@
       <h2 class="section-title">About Me</h2>
       <p class="about-text">{{ user.summary }}</p>
       <a
-        v-if="user.resume_link"
-        :href="user.resume_link"
+        href="/Devender_Gupta_Resume.pdf"
         class="btn btn-primary resume-button"
         download
         target="_blank"
@@ -31,7 +30,7 @@
       </div>
     </section>
 
-    <section class="section-block">
+    <section v-if="showEducation" class="section-block">
       <h2 class="section-title">Education</h2>
       <div class="timeline">
         <div v-for="edu in user.education" :key="edu.degree" class="timeline-item">
@@ -55,26 +54,27 @@ const { data: user } = await useAsyncData("user-about", () => queryCollection("u
 const { data: experiences } = await useAsyncData("experiences", () =>
   queryCollection("experiences").order("id", "DESC").all()
 )
+const showEducation = false
 </script>
 
 <style scoped>
 .about-page {
-  padding: 4rem 1.5rem;
+  padding-block: var(--space-16);
 }
 
 @media (min-width: 768px) {
   .about-page {
-    padding: 4rem 0;
+    padding-block: var(--space-16);
   }
 }
 
 .section-block {
-  margin-bottom: 4rem;
-  max-width: 800px;
+  margin-bottom: var(--space-16);
+  max-width: 50rem;
 }
 
 .about-text {
-  color: #a7a7a7;
+  color: var(--color-text-muted);
   line-height: 1.8;
   font-size: 1.1rem;
 }
@@ -91,55 +91,52 @@ const { data: experiences } = await useAsyncData("experiences", () =>
 
 .item-title {
   font-size: 1.25rem;
-  color: #ccc;
-  font-weight: 500;
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
 }
 
 .badge {
-  padding: 4px 12px;
-  border-radius: 100px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
   font-size: 0.75rem;
-  font-weight: 600;
-  background: #d7ffe0;
-  color: #0f5e2c;
-  /* Default for Internship */
+  font-weight: var(--font-weight-semibold);
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
 }
 
 .badge.full-time {
-  background: #d7ffe0;
-  color: #0f5e2c;
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
 }
 
 .timeline-meta {
   display: flex;
-  gap: 2rem;
-  margin: 0.5rem 0 1.5rem;
-  color: #a7a7a7;
+  gap: var(--space-8);
+  margin: var(--space-2) 0 var(--space-6);
+  color: var(--color-text-muted);
   font-size: 0.85rem;
   flex-wrap: wrap;
-  /* Allows metadata to wrap to next line on small screens */
 }
 
 @media (max-width: 480px) {
   .timeline-meta {
-    gap: 0.5rem 1rem;
+    gap: var(--space-2) var(--space-4);
     flex-direction: column;
-    /* Stacks Company, Location, Date vertically */
   }
 
   .timeline-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--space-2);
   }
 }
 
 .divider {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: var(--border-strong);
 }
 
 .resume-button {
-  margin-top: 2rem;
+  margin-top: var(--space-8);
 }
 </style>

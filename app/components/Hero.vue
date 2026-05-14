@@ -5,12 +5,12 @@
         Hi 👋,<br >
         My name is<br >
         <span class="gradient-text">{{ user.name }}</span
-        ><br >
+        >,<br >
         {{ user.introduction }}
       </h1>
     </div>
     <div class="hero-image">
-      <div class="profile-outer-ring">
+      <div class="profile-outer-ring" :aria-label="user.designation">
         <NuxtImg
           src="/devender-gupta.png"
           alt="Devender Gupta"
@@ -20,6 +20,10 @@
           preload
           class="profile-img-transparent"
         />
+        <div class="designation-tooltip" role="tooltip">
+          <span class="designation-label">Role</span>
+          <span class="designation-value">{{ user.designation }}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -31,72 +35,110 @@ const { data: user } = await useAsyncData("user-hero", () => queryCollection("us
 
 <style scoped>
 .hero {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto;
   align-items: center;
-  padding: 6rem 0;
-  /* Add this for mobile stacking */
-  flex-direction: row;
+  gap: var(--space-8);
+  padding-block: var(--space-24);
 }
 
 .hero-text {
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-bold);
   line-height: 1.1;
-  color: var(--text-heading);
+  color: var(--color-heading);
 }
 
-/* 100/100 Mobile Responsiveness */
 @media (max-width: 768px) {
   .hero {
-    flex-direction: column-reverse;
-    /* Text below image on mobile */
+    grid-template-columns: 1fr;
     text-align: center;
-    padding: 3rem 0;
-    gap: 2rem;
-  }
-
-  .hero-text {
-    font-size: 2.2rem;
-    /* Smaller text for mobile */
+    padding-block: var(--space-12);
   }
 
   .profile-outer-ring {
-    width: 250px !important;
-    /* Scale down the image */
-    height: 250px !important;
+    width: 15.625rem;
+    height: 15.625rem;
+    margin-inline: auto;
   }
 }
 
-/* 1. This handles the Blue-to-Pink Outer Ring */
 .profile-outer-ring {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* colorful gradient ring from your design */
-  background: linear-gradient(180deg, var(--secondary-accent) 0%, var(--primary-accent) 100%);
+  background: var(--gradient-brand-vertical);
   border-radius: 50%;
-  width: 350px;
-  height: 350px;
-  /* 2. Middle Layer Gap: 
-       This padding creates the space for the colorful ring to show */
-  padding: 6px;
+  width: 21.875rem;
+  height: 21.875rem;
+  padding: 0.375rem;
   box-sizing: border-box;
-  /* Crucial for Nuxt 4 to maintain width */
 }
 
-/* 3. This handles your Photo AND its internal Black-to-White Gradient */
 .profile-img-transparent {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-
-  /* NEW: This adds the Black to White gradient BEHIND your transparent photo */
-  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-white) 100%);
-
-  /* Pro Tip: Ensure the image is cropped tightly in Nuxt */
+  background: var(--gradient-profile-bg);
   border: none;
-  /* Removes any previous border attempts */
+}
+
+.designation-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 35%) scale(0.98);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 12rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: rgba(var(--color-bg-rgb), 0.92);
+  border: var(--border-subtle);
+  color: var(--color-white);
+  text-align: center;
+  box-shadow: var(--shadow-primary);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--duration-base) var(--easing-standard),
+    transform var(--duration-base) var(--easing-standard),
+    visibility var(--duration-base) var(--easing-standard);
+}
+
+.designation-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.designation-value {
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.profile-outer-ring:hover .designation-tooltip,
+.profile-outer-ring:focus-within .designation-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 22%) scale(1);
+}
+
+@media (max-width: 768px) {
+  .designation-tooltip {
+    bottom: var(--space-2);
+    transform: translate(-50%, 110%);
+    min-width: 10.5rem;
+  }
+
+  .profile-outer-ring:hover .designation-tooltip,
+  .profile-outer-ring:focus-within .designation-tooltip {
+    transform: translate(-50%, 100%);
+  }
 }
 </style>

@@ -66,27 +66,22 @@ defineProps({
 
 <style scoped>
 .project-card {
-  background: #212121;
-  /* Slightly lighter than pure black */
-  border-radius: 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-
-  /* height: 650px; */
-  /* Fixed height for all cards to ensure consistency */
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: var(--border-subtle);
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease;
+    transform var(--duration-base) var(--easing-standard),
+    border-color var(--duration-base) var(--easing-standard);
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* Let the grid handle the height */
-  min-height: 600px;
+  min-height: 37.5rem;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
-  border-color: var(--primary-accent);
+  border-color: var(--color-primary);
 }
 
 .image-wrapper {
@@ -107,123 +102,120 @@ defineProps({
   left: 0;
   width: 100%;
   height: 50%;
-  background: linear-gradient(to top, #212121, transparent);
+  background: linear-gradient(to top, var(--color-surface), transparent);
 }
 
 .project-content {
-  padding: 1.5rem;
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  /* Contains the scroll area */
 }
 
 .header-meta {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .project-title {
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--color-white);
   margin: 0;
 }
 
 .project-company {
-  color: var(--primary-accent);
+  color: var(--color-primary);
   font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 4px;
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--space-1);
 }
 
 .project-date {
-  color: #666;
+  color: var(--color-text-dim);
   font-size: 0.8rem;
 }
 
-/* THE FIX: Scrollable area for variable content */
 .scroll-area {
   flex: 1;
   overflow-y: auto;
-  padding-right: 8px;
-  margin-bottom: 1rem;
+  padding-right: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
-/* Custom Scrollbar for a premium look */
 .scroll-area::-webkit-scrollbar {
-  width: 4px;
+  width: 0.25rem;
 }
 
 .scroll-area::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 10px;
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-pill);
 }
 
 .project-description {
-  color: #a7a7a7;
+  color: var(--color-text-muted);
   font-size: 0.85rem;
   line-height: 1.6;
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-5);
 }
 
 .tech-stack-text {
   font-size: 0.75rem;
-  color: #ccc;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 8px;
-  border-radius: 6px;
-  margin-bottom: 1rem;
+  color: var(--color-text);
+  background: rgba(var(--color-white-rgb), 0.03);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
 }
 
 .label {
   font-weight: bold;
-  color: #fff;
+  color: var(--color-white);
 }
 
 .list-title {
   font-size: 0.85rem;
-  color: #eee;
-  margin-bottom: 0.5rem;
+  color: var(--color-heading);
+  margin-bottom: var(--space-2);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03em;
 }
 
 .custom-list {
   padding-left: 1.2rem;
-  margin: 0 0 1rem 0;
-  color: #a7a7a7;
+  margin: 0 0 var(--space-4) 0;
+  color: var(--color-text-muted);
   font-size: 0.85rem;
 }
 
 .custom-list li {
-  margin-bottom: 6px;
+  margin-bottom: var(--space-2);
 }
 
 .project-links {
   display: flex;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #333;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-surface-muted);
 }
 
 .link-btn {
   flex: 1;
   text-align: center;
-  padding: 8px;
-  border-radius: 8px;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
   text-decoration: none;
   font-size: 0.8rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  color: #fff;
-  background: #333;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-fast) var(--easing-standard);
+  color: var(--color-white);
+  background: var(--color-surface-muted);
 }
 
 .link-btn:hover {
-  background: #444;
+  background: var(--color-surface-soft);
 }
 
 .link-btn.preview {
-  background: linear-gradient(90deg, #13b0f5, #e70faa);
+  background: var(--gradient-brand);
 }
 </style>

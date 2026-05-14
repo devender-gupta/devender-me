@@ -63,63 +63,67 @@ const { data: user } = await useAsyncData("user-footer", () => queryCollection("
 
 <style scoped>
 .footer {
-  padding: 4rem 0 2rem;
-  background-color: var(--bg-dark);
-  margin-top: 4rem;
+  padding: var(--space-16) 0 var(--space-8);
+  background-color: var(--color-bg);
+  margin-top: var(--space-16);
 }
 
 .footer-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 .footer-info {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: var(--space-10);
 }
 
 .logo {
-  color: var(--text-white);
+  color: var(--color-text);
   text-decoration: none;
+}
+
+.name-suffix {
+  color: var(--color-text);
 }
 
 .info-link {
-  color: var(--text-white);
+  color: var(--color-text);
   text-decoration: none;
   font-size: 0.9rem;
-  transition: color 0.3s;
+  transition: color var(--duration-base) var(--easing-standard);
 }
 
 .info-link:hover {
-  color: var(--primary-accent);
+  color: var(--color-primary);
 }
 
 .footer-socials {
   display: flex;
-  gap: 1.5rem;
+  gap: var(--space-6);
   font-size: 1.4rem;
 }
 
 .footer-socials a {
-  color: var(--text-white);
+  color: var(--color-text);
   display: inline-flex;
   transition:
-    transform 0.3s,
-    color 0.3s;
+    transform var(--duration-base) var(--easing-standard),
+    color var(--duration-base) var(--easing-standard);
 }
 
 .footer-socials a:hover {
-  color: var(--primary-accent);
+  color: var(--color-primary);
   transform: translateY(-3px);
 }
 
 .footer-divider {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 2rem;
+  border-top: var(--border-strong);
+  margin-bottom: var(--space-8);
 }
 
 .footer-bottom {
@@ -127,35 +131,35 @@ const { data: user } = await useAsyncData("user-footer", () => queryCollection("
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: var(--space-6);
 }
 
 .footer-nav {
   display: flex;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .footer-nav a {
-  color: var(--text-white);
+  color: var(--color-text);
   text-decoration: none;
   font-size: 0.85rem;
-  transition: color 0.3s;
+  transition: color var(--duration-base) var(--easing-standard);
 }
 
 .footer-nav a:hover {
-  color: var(--primary-accent);
+  color: var(--color-primary);
 }
 
 @media (max-width: 992px) {
   .footer-top {
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-8);
     text-align: center;
   }
 
   .footer-info {
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
   }
 }
 
@@ -168,7 +172,7 @@ const { data: user } = await useAsyncData("user-footer", () => queryCollection("
   .footer-nav {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: var(--space-4);
   }
 }
 </style>

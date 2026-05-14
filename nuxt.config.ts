@@ -5,19 +5,19 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en"
       },
-      title: "Devender Gupta | Full Stack Developer",
+      title: "Devender Gupta | Full Stack Engineer",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
           name: "description",
           content:
-            "Portfolio of Devender Gupta, a Full Stack Developer specializing in high-performance web applications using Laravel, NodeJS, VueJS, ReactJS, and MySQL."
+            "Portfolio of Devender Gupta, a Full Stack Engineer specializing in high-performance web applications using Laravel, NodeJS, VueJS, ReactJS, and MySQL."
         },
         // Open Graph / Facebook / LinkedIn
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://devender.me" }, // Replace with your actual domain later
-        { property: "og:title", content: "Devender Gupta | Full Stack Developer" },
+        { property: "og:title", content: "Devender Gupta | Full Stack Engineer" },
         {
           property: "og:description",
           content: "Explore the projects and technical expertise of Devender Gupta."
@@ -32,7 +32,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
   modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint"],
   devtools: { enabled: true },
   future: {

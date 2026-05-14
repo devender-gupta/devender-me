@@ -19,7 +19,8 @@ export default defineContentConfig({
         tech: z.array(z.string()),
         description: z.string(),
         roles: z.array(z.string()),
-        achievements: z.array(z.string())
+        achievements: z.array(z.string()),
+        display: z.string().optional()
       })
     }),
     user: defineCollection({
@@ -38,7 +39,6 @@ export default defineContentConfig({
         }),
         github_link: z.string().url(),
         linkedin_link: z.string().url(),
-        resume_link: z.string().url().optional(),
         education: z.array(
           z.object({
             institution: z.string(),

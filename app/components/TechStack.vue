@@ -2,7 +2,9 @@
   <section class="tech-section container">
     <div class="text-center">
       <h2 class="section-title">My Tech Stack</h2>
-      <p class="section-subtitle">Technologies I’ve been working with recently</p>
+      <p class="section-subtitle">
+        The primary technologies I leverage to deliver robust digital solutions.
+      </p>
     </div>
 
     <div class="tech-grid">
@@ -20,49 +22,34 @@ const techData = computed(() => user.value?.tech_stack || [])
 
 <style scoped>
 .tech-section {
-  padding: 80px 0;
+  padding-block: var(--space-20);
 }
 
 .tech-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  /* Desktop */
-  gap: 40px;
+  gap: var(--space-10);
   justify-items: center;
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .tech-grid {
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 icons per row on mobile */
-    gap: 20px;
-  }
-
-  .tech-icon {
-    font-size: 50px !important;
-    /* Smaller icons */
-  }
-}
-
 .tech-icon {
-  font-size: 80px;
-  /* Adjust size to match design */
+  font-size: clamp(3.125rem, 6vw, 5rem);
   filter: grayscale(20%);
   transition:
-    transform 0.3s ease,
-    filter 0.3s ease;
+    transform var(--duration-base) var(--easing-standard),
+    filter var(--duration-base) var(--easing-standard);
 }
 
 .tech-icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
   filter: grayscale(0%);
 }
 
-/* Responsive: 4 columns on tablet, 3 on mobile */
 @media (max-width: 768px) {
   .tech-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
   }
 }
 

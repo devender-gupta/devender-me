@@ -1,117 +1,118 @@
 /* app/assets/css/main.css */
 
-:root {
-  /* Colors from your design */
-  --bg-dark: #191919;
-  --bg-white: #cccccc;
-  --card-bg: #363636;
-  --text-white: #cccccc;
-  --text-heading: #d9d9d9;
-  --primary-accent: #00c0ff; /* The blue/cyan in your name */
-  --secondary-accent: #e70faa; /* The pink in the name/gradient */
-
-  /* Typography */
-  --font-main: "Poppins", sans-serif;
-}
-
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-white);
-  font-family: var(--font-main);
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
+* {
+  box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-behavior: auto;
+  scroll-padding-top: 6.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 h1,
 h2,
 h3 {
-  color: var(--text-heading);
-  font-weight: 700;
+  color: var(--color-heading);
+  font-weight: var(--font-weight-bold);
+}
+
+a {
+  color: inherit;
 }
 
 .container {
-  max-width: 1200px;
+  width: min(100%, var(--container-max-width));
   margin: 0 auto;
-  padding: 0 2rem; /* Default Desktop */
+  padding-inline: var(--container-padding-desktop);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 1.5rem; /* More space for content on small screens */
+    padding-inline: var(--container-padding-mobile);
   }
 }
 
 .gradient-text {
-  background: linear-gradient(45deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: clamp(2rem, 3.4vw, 2.5rem);
+  margin-bottom: var(--space-2);
+  line-height: 1.2;
 }
 
 .section-subtitle {
-  font-size: 1.5rem;
-  color: #a7a7a7;
-  margin-bottom: 50px;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-12);
 }
 
 .text-center {
   text-align: center;
 }
 
-/* Base Button Styles */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-decoration: none;
+  gap: var(--space-2);
+  padding: 0.75rem 1.75rem;
   border: none;
-  gap: 8px; /* Space for icons */
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--duration-base) var(--easing-standard);
 }
 
-/* Primary: The Gradient Look */
 .btn-primary {
-  background: linear-gradient(90deg, #13b0f5, #e70faa);
-  color: white;
-  box-shadow: 0 4px 15px rgba(19, 176, 245, 0.2);
+  background: var(--gradient-brand);
+  color: var(--color-white);
+  box-shadow: var(--shadow-primary);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(231, 15, 170, 0.4);
-  filter: brightness(1.1);
+  box-shadow: var(--shadow-primary-hover);
+  filter: brightness(1.08);
 }
 
 .btn-primary:active {
   transform: translateY(0);
 }
 
-/* Secondary: The Glass/Outline Look */
 .btn-secondary {
   background: transparent;
-  color: white;
-  border: 1.5px solid #fff;
-  opacity: 0.8;
+  color: var(--color-white);
+  border: 1px solid rgba(var(--color-white-rgb), 0.8);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  opacity: 1;
-  border-color: #13b0f5;
-  color: #13b0f5;
+  background: rgba(var(--color-white-rgb), 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }

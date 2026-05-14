@@ -1,8 +1,8 @@
 <template>
   <section class="projects-section container">
     <div class="section-heading text-center">
-      <h2 class="section-title">Projects</h2>
-      <p class="section-subtitle">Things I’ve built so far</p>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">A snapshot of my latest engineering contributions.</p>
     </div>
     <div class="projects-grid">
       <ProjectCard v-for="project in projects" :key="project.path" :project="project" />
@@ -12,25 +12,19 @@
 
 <script setup>
 const { data: projects } = await useAsyncData("projects", () =>
-  queryCollection("projects").order("id", "DESC").all()
+  queryCollection("projects").where("display", "==", "true").order("id", "DESC").all()
 )
 </script>
 <style scoped>
 .projects-section {
-  padding: 80px 10px;
-}
-
-@media (min-width: 768px) {
-  .projects-section {
-    padding: 80px 0;
-  }
+  padding-block: var(--space-20);
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  padding-bottom: 5rem;
+  gap: var(--space-10);
+  padding-bottom: var(--space-20);
 }
 
 @media (max-width: 1024px) {

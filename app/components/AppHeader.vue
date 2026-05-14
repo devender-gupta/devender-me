@@ -14,10 +14,24 @@
         <NuxtLink to="/#home" class="nav-link" :class="{ active: activeSection === 'home' }">
           Home
         </NuxtLink>
-        <li><a href="#tech" class="nav-link">Tech Stack</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li>
+          <a href="#tech" class="nav-link" :class="{ active: activeSection === 'tech' }"
+            >Tech Stack</a
+          >
+        </li>
+        <li>
+          <a href="#projects" class="nav-link" :class="{ active: activeSection === 'projects' }"
+            >Projects</a
+          >
+        </li>
+        <li>
+          <a href="#about" class="nav-link" :class="{ active: activeSection === 'about' }">About</a>
+        </li>
+        <li>
+          <a href="#contact" class="nav-link" :class="{ active: activeSection === 'contact' }"
+            >Contact</a
+          >
+        </li>
       </ul>
 
       <div class="header-socials">
@@ -45,7 +59,39 @@
 </template>
 
 <script setup>
+const activeSection = ref("home")
 const { data: user } = await useAsyncData("user-header", () => queryCollection("user").first())
+
+const sections = ["home", "tech", "projects", "about", "contact"]
+
+onMounted(() => {
+  const updateActiveSection = () => {
+    const offset = 140
+
+    for (const sectionId of sections) {
+      const element = document.getElementById(sectionId)
+      if (!element) {
+        continue
+      }
+
+      const top = element.getBoundingClientRect().top
+      if (top - offset <= 0) {
+        activeSection.value = sectionId
+      }
+    }
+
+    if (window.scrollY < 120) {
+      activeSection.value = "home"
+    }
+  }
+
+  updateActiveSection()
+  window.addEventListener("scroll", updateActiveSection, { passive: true })
+
+  onBeforeUnmount(() => {
+    window.removeEventListener("scroll", updateActiveSection)
+  })
+})
 </script>
 
 <style scoped>
@@ -53,70 +99,86 @@ const { data: user } = await useAsyncData("user-header", () => queryCollection("
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(25, 25, 25, 0.8);
-  /* Glassmorphism effect */
+  background: rgba(var(--color-bg-rgb), 0.8);
   backdrop-filter: blur(10px);
-  padding: 1.5rem 0;
+  border-bottom: var(--border-subtle);
+  padding-block: var(--space-6);
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
-  /* This is the secret sauce */
   align-items: center;
 }
 
-/* Nav links styling */
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: var(--space-10);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .nav-link {
-  color: #a7a7a7;
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   font-size: 1rem;
-  transition: color 0.3s ease;
+  transition: color var(--duration-base) var(--easing-standard);
 }
 
 .nav-link:hover {
-  color: #fff;
+  color: var(--color-white);
 }
 
-/* Logo styling */
+.nav-link.active {
+  color: var(--color-primary);
+}
+
 .logo-link {
   text-decoration: none;
   color: inherit;
 }
 
-/* Social icons styling */
+.logo {
+  color: var(--color-heading);
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.brackets {
+  color: var(--color-text-muted);
+}
+
+.name {
+  color: var(--color-text);
+}
+
 .header-socials {
   display: flex;
-  gap: 1.2rem;
+  gap: var(--space-5);
   font-size: 1.5rem;
 }
 
 .header-socials a {
-  color: #a7a7a7;
+  color: var(--color-text-muted);
   transition:
-    color 0.3s,
-    transform 0.3s;
+    color var(--duration-base) var(--easing-standard),
+    transform var(--duration-base) var(--easing-standard);
 }
 
 .header-socials a:hover {
-  color: #fff;
+  color: var(--color-white);
   transform: translateY(-2px);
 }
 
-/* Responsive: Hide nav on mobile or change to hamburger */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
-    /* You can implement a mobile menu later */
+  }
+
+  .header {
+    padding-block: var(--space-4);
   }
 }
 </style>
