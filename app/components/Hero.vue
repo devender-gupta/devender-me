@@ -35,6 +35,8 @@ const { data: user } = await useAsyncData("user-hero", () => queryCollection("us
   justify-content: space-between;
   align-items: center;
   padding: 6rem 0;
+  /* Add this for mobile stacking */
+  flex-direction: row;
 }
 
 .hero-text {
@@ -42,6 +44,28 @@ const { data: user } = await useAsyncData("user-hero", () => queryCollection("us
   font-weight: 700;
   line-height: 1.1;
   color: var(--text-heading);
+}
+
+/* 100/100 Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+    /* Text below image on mobile */
+    text-align: center;
+    padding: 3rem 0;
+    gap: 2rem;
+  }
+
+  .hero-text {
+    font-size: 2.2rem;
+    /* Smaller text for mobile */
+  }
+
+  .profile-outer-ring {
+    width: 250px !important;
+    /* Scale down the image */
+    height: 250px !important;
+  }
 }
 
 /* 1. This handles the Blue-to-Pink Outer Ring */

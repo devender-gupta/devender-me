@@ -25,11 +25,24 @@ const techData = computed(() => user.value?.tech_stack || [])
 
 .tech-grid {
   display: grid;
-  /* 6 columns as per your Figma/Screenshot */
   grid-template-columns: repeat(6, 1fr);
+  /* Desktop */
   gap: 40px;
   justify-items: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .tech-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 icons per row on mobile */
+    gap: 20px;
+  }
+
+  .tech-icon {
+    font-size: 50px !important;
+    /* Smaller icons */
+  }
 }
 
 .tech-icon {

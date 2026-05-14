@@ -59,7 +59,13 @@ const { data: experiences } = await useAsyncData("experiences", () =>
 
 <style scoped>
 .about-page {
-  padding: 4rem 0;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .about-page {
+    padding: 4rem 0;
+  }
 }
 
 .section-block {
@@ -110,6 +116,22 @@ const { data: experiences } = await useAsyncData("experiences", () =>
   margin: 0.5rem 0 1.5rem;
   color: #a7a7a7;
   font-size: 0.85rem;
+  flex-wrap: wrap;
+  /* Allows metadata to wrap to next line on small screens */
+}
+
+@media (max-width: 480px) {
+  .timeline-meta {
+    gap: 0.5rem 1rem;
+    flex-direction: column;
+    /* Stacks Company, Location, Date vertically */
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 .divider {

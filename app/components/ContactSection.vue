@@ -15,8 +15,15 @@ const { data: user } = await useAsyncData("user-contact", () => queryCollection(
 
 <style scoped>
 .contact-section {
-  padding: 10rem 0;
+  padding: 10rem 0.5rem;
   text-align: center;
+}
+
+@media screen {
+  .contact-section {
+    padding: 10rem 0;
+    text-align: center;
+  }
 }
 
 .contact-title {

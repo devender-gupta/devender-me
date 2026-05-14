@@ -17,7 +17,13 @@ const { data: projects } = await useAsyncData("projects", () =>
 </script>
 <style scoped>
 .projects-section {
-  padding: 80px 0;
+  padding: 80px 10px;
+}
+
+@media (min-width: 768px) {
+  .projects-section {
+    padding: 80px 0;
+  }
 }
 
 .projects-grid {
