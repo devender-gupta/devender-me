@@ -1,22 +1,38 @@
 /* app/assets/css/main.css */
 
+:root {
+  --bg-dark: #191919;
+  --text-white: #cccccc;
+  --text-heading: #d9d9d9;
+}
+
+.light,
+.light-mode {
+  --bg-dark: #ffffff;
+  --text-white: #333333;
+  --text-heading: #111111;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   scroll-padding-top: 6.25rem;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
   font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color var(--duration-base) var(--easing-standard),
+    color var(--duration-base) var(--easing-standard);
 }
 
 h1,
@@ -32,7 +48,7 @@ p {
 h1,
 h2,
 h3 {
-  color: var(--color-heading);
+  color: var(--text-heading);
   font-weight: var(--font-weight-bold);
 }
 

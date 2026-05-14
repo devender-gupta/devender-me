@@ -53,6 +53,7 @@
         >
           <AppIcon name="uil:linkedin" />
         </a>
+        <ThemeSwitcher />
       </div>
     </nav>
   </header>
@@ -80,16 +81,16 @@ onMounted(() => {
       }
     }
 
-    if (window.scrollY < 120) {
+    if (globalThis.scrollY < 120) {
       activeSection.value = "home"
     }
   }
 
   updateActiveSection()
-  window.addEventListener("scroll", updateActiveSection, { passive: true })
+  globalThis.addEventListener("scroll", updateActiveSection, { passive: true })
 
   onBeforeUnmount(() => {
-    window.removeEventListener("scroll", updateActiveSection)
+    globalThis.removeEventListener("scroll", updateActiveSection)
   })
 })
 </script>
@@ -158,6 +159,7 @@ onMounted(() => {
   display: flex;
   gap: var(--space-5);
   font-size: 1.5rem;
+  align-items: center;
 }
 
 .header-socials a {

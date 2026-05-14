@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     }
   },
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
-  modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint"],
+  modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint", "@nuxtjs/color-mode"],
   devtools: { enabled: true },
   future: {
     compatibilityVersion: 4
@@ -47,5 +47,11 @@ export default defineNuxtConfig({
   icon: {
     mode: "css",
     cssLayer: "base"
+  },
+  // @ts-expect-error Added by @nuxtjs/color-mode module after dependency install/prepare
+  colorMode: {
+    preference: "system",
+    fallback: "dark",
+    classSuffix: ""
   }
 })

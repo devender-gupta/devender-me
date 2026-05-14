@@ -69,3 +69,33 @@
   --container-padding-desktop: 2rem;
   --container-padding-mobile: 1.5rem;
 }
+
+/* ─────────────────────────────────────────────────────
+  Light theme — applied when <html class="light">
+  (@nuxtjs/color-mode with classSuffix: '')
+───────────────────────────────────────────────────── */
+.light {
+  color-scheme: light;
+
+  --color-bg: #f5f7fa;
+  --color-bg-rgb: 245, 247, 250;
+  --color-surface: #ffffff;
+  --color-surface-soft: #eef0f4;
+  --color-surface-muted: #e2e5eb;
+  --color-text: #374151;
+  --color-heading: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-dim: #9ca3af;
+
+  /* Repurpose --color-white / --color-white-rgb as the "foreground" colour so
+    all existing hover states and btn-secondary styles work in both themes. */
+  --color-white: #111827;
+  --color-white-rgb: 17, 24, 39;
+
+  --color-success-bg: #dcfce7;
+  --color-success-text: #15803d;
+
+  --border-subtle: 1px solid rgba(var(--color-white-rgb), 0.08);
+  --border-strong: 1px solid rgba(var(--color-white-rgb), 0.15);
+  --gradient-profile-bg: linear-gradient(180deg, var(--color-bg) 0%, var(--color-text) 100%);
+}
