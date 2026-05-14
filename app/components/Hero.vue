@@ -12,7 +12,7 @@
     <div class="hero-image">
       <div class="profile-outer-ring" :aria-label="user.designation">
         <NuxtImg
-          src="/devender-gupta.png"
+          src="/devender-gupta.webp"
           alt="Devender Gupta"
           width="350"
           height="350"

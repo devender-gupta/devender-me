@@ -2,7 +2,7 @@
   <div class="project-card">
     <div class="image-wrapper">
       <NuxtImg
-        :src="'/project-placeholder.jpg'"
+        :src="'/project-placeholder.webp'"
         :alt="project.title"
         class="project-image"
         loading="lazy"
