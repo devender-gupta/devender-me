@@ -5,9 +5,9 @@
         <div class="footer-brand">
           <NuxtLink to="/#home" class="logo">
             <span class="brackets">{</span>
-            <span class="gradient-text">{{ user.brand.first }}</span>
+            <span class="gradient-text">{{ user?.brand?.first }}</span>
             <span class="brackets">}</span>
-            <span class="name-suffix">&nbsp;{{ user.brand.last }}</span>
+            <span class="name-suffix">&nbsp;{{ user?.brand?.last }}</span>
           </NuxtLink>
         </div>
 
