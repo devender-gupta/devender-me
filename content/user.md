@@ -10,6 +10,7 @@ brand:
   last: "gupta"
 github_link: "https://github.com/devender-gupta"
 linkedin_link: "https://www.linkedin.com/in/devender-gupta"
+stackoverflow_link: "https://stackoverflow.com/users/8053641/devender-gupta"
 education:
   - degree: "Bachelor in Computer Science"
     institution: "Toc-H Institute of Science and Technology"

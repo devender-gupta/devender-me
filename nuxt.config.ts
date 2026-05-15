@@ -53,7 +53,6 @@ export default defineNuxtConfig({
     mode: "css",
     cssLayer: "base"
   },
-  // @ts-expect-error Added by @nuxtjs/color-mode module after dependency install/prepare
   colorMode: {
     preference: "system",
     fallback: "dark",

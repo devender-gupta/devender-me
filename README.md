@@ -2,6 +2,8 @@
 
 Personal portfolio website built with Nuxt 4 and Nuxt Content 3.
 
+The production site is configured around `https://devendergupta.com`.
+
 Live content is driven from Markdown files in the `content/` directory and rendered into sections for hero, tech stack, projects, about, and contact.
 
 ## Tech Stack
@@ -126,6 +128,7 @@ Configured in `nuxt.config.ts` and `public/site.webmanifest`:
 
 - Title + description meta
 - Open Graph tags
+- Canonical URL set to `https://devendergupta.com`
 - Favicon (`.ico`, `16x16`, `32x32`)
 - Apple touch icon
 - Web manifest link

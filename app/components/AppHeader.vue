@@ -53,6 +53,15 @@
         >
           <AppIcon name="uil:linkedin" />
         </a>
+        <a
+          v-if="user?.stackoverflow_link"
+          :href="user.stackoverflow_link"
+          target="_blank"
+          aria-label="Stack Overflow"
+          rel="noopener noreferrer"
+        >
+          <AppIcon name="ion:logo-stackoverflow" />
+        </a>
         <ThemeSwitcher />
       </div>
     </nav>

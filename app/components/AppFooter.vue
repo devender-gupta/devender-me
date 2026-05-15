@@ -38,6 +38,15 @@
             >
               <AppIcon name="uil:linkedin" :size="24" />
             </a>
+            <a
+              v-if="user?.stackoverflow_link"
+              :href="user.stackoverflow_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Stack Overflow"
+            >
+              <AppIcon name="ion:logo-stackoverflow" :size="24" />
+            </a>
           </div>
         </div>
       </div>

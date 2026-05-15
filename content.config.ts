@@ -39,6 +39,7 @@ export default defineContentConfig({
         }),
         github_link: z.string().url(),
         linkedin_link: z.string().url(),
+        stackoverflow_link: z.string().url(),
         education: z.array(
           z.object({
             institution: z.string(),
