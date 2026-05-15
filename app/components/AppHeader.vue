@@ -4,9 +4,9 @@
       <NuxtLink to="/" class="logo-link">
         <div class="logo">
           <span class="brackets">{</span>
-          <span class="gradient-text">{{ user.brand.first }}</span>
+          <span class="gradient-text">{{ user?.brand?.first }}</span>
           <span class="brackets">}</span>
-          <span class="name">&nbsp;{{ user.brand.last }}</span>
+          <span class="name">&nbsp;{{ user?.brand?.last }}</span>
         </div>
       </NuxtLink>
 
