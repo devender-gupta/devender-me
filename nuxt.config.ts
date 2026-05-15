@@ -32,7 +32,8 @@ export default defineNuxtConfig({
         { rel: "manifest", href: "/site.webmanifest" },
         // Pre-connect to Google Fonts if you are using them to save 100-200ms
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+        { rel: "canonical", href: "https://devendergupta.com" }
       ]
     }
   },
