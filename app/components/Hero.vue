@@ -17,8 +17,9 @@
           height="350"
           alt="Devender Gupta"
           class="profile-img-transparent"
+          loading="eager"
           fetchpriority="high"
-          decoding="async"
+          decoding="sync"
         >
         <div class="designation-tooltip" role="tooltip">
           <span class="designation-label">Role</span>

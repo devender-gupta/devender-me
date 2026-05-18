@@ -34,6 +34,7 @@ export default defineNuxtConfig({
           rel: "preload",
           as: "image",
           href: "/devender-gupta.webp",
+          fetchpriority: "high",
           type: "image/webp"
         }
       ]
