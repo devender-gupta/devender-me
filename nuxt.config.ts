@@ -39,16 +39,12 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
   modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint", "@nuxtjs/color-mode"],
-  devtools: { enabled: true },
+  devtools: { enabled: import.meta.dev },
   future: {
     compatibilityVersion: 4
   },
   compatibilityDate: "2026-05-13",
-  vite: {
-    optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit"]
-    }
-  },
+
   icon: {
     mode: "css",
     cssLayer: "base"

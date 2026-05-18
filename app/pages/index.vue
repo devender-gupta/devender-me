@@ -1,9 +1,9 @@
 <template>
   <div>
     <Hero id="home" />
-    <TechStack id="tech" />
-    <Projects id="projects" />
-    <AboutMe id="about" />
-    <ContactSection id="contact" />
+    <LazyTechStack id="tech" />
+    <LazyProjects id="projects" />
+    <LazyAboutMe id="about" />
+    <LazyContactSection id="contact" />
   </div>
 </template>
