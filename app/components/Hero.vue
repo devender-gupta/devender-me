@@ -11,14 +11,15 @@
     </div>
     <div class="hero-image">
       <div class="profile-outer-ring" :aria-label="user.designation">
-        <NuxtImg
+        <img
           src="/devender-gupta.webp"
-          alt="Devender Gupta"
           width="350"
           height="350"
-          quality="80"
+          alt="Devender Gupta"
           class="profile-img-transparent"
-        />
+          fetchpriority="high"
+          decoding="async"
+        >
         <div class="designation-tooltip" role="tooltip">
           <span class="designation-label">Role</span>
           <span class="designation-value">{{ user.designation }}</span>

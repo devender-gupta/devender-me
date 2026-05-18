@@ -2,9 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      htmlAttrs: {
-        lang: "en"
-      },
+      htmlAttrs: { lang: "en" },
       title: "Devender Gupta | Full Stack Engineer",
       meta: [
         { charset: "utf-8" },
@@ -14,15 +12,14 @@ export default defineNuxtConfig({
           content:
             "Portfolio of Devender Gupta, a Full Stack Engineer specializing in high-performance web applications using Laravel, NodeJS, VueJS, ReactJS, and MySQL."
         },
-        // Open Graph / Facebook / LinkedIn
         { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://devender.me" }, // Replace with your actual domain later
+        { property: "og:url", content: "https://devender.me" },
         { property: "og:title", content: "Devender Gupta | Full Stack Engineer" },
         {
           property: "og:description",
           content: "Explore the projects and technical expertise of Devender Gupta."
         },
-        { property: "og:image", content: "/og-preview.png" } // The preview image
+        { property: "og:image", content: "/og-preview.png" }
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
@@ -30,21 +27,23 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "manifest", href: "/site.webmanifest" },
-        // Pre-connect to Google Fonts if you are using them to save 100-200ms
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
-        { rel: "canonical", href: "https://devendergupta.com" }
+        { rel: "canonical", href: "https://devendergupta.com" },
+        {
+          rel: "preload",
+          as: "image",
+          href: "/devender-gupta.webp",
+          type: "image/webp"
+        }
       ]
     }
   },
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
   modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint", "@nuxtjs/color-mode"],
   devtools: { enabled: import.meta.dev },
-  future: {
-    compatibilityVersion: 4
-  },
+  future: { compatibilityVersion: 4 },
   compatibilityDate: "2026-05-13",
-
   icon: {
     mode: "css",
     cssLayer: "base"
