@@ -8,7 +8,7 @@
   --color-text: #cccccc;
   --color-heading: #d9d9d9;
   --color-text-muted: #a7a7a7;
-  --color-text-dim: #666666;
+  --color-text-dim: #8f8f8f;
   --color-white: #ffffff;
   --color-white-rgb: 255, 255, 255;
   --color-primary: #13b0f5;
@@ -85,7 +85,11 @@
   --color-text: #374151;
   --color-heading: #111827;
   --color-text-muted: #6b7280;
-  --color-text-dim: #9ca3af;
+  --color-text-dim: #4b5563;
+
+  /* Use higher-contrast accent shades in light theme for accessible text and links. */
+  --color-primary: #0a66c2;
+  --color-secondary: #a21caf;
 
   /* Repurpose --color-white / --color-white-rgb as the "foreground" colour so
     all existing hover states and btn-secondary styles work in both themes. */

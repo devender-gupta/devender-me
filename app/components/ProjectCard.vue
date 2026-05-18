@@ -131,7 +131,7 @@ defineProps({
 }
 
 .project-date {
-  color: var(--color-text-dim);
+  color: var(--color-text-muted);
   font-size: 0.8rem;
 }
 

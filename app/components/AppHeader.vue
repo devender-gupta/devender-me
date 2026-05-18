@@ -11,9 +11,11 @@
       </NuxtLink>
 
       <ul class="nav-links">
-        <NuxtLink to="/#home" class="nav-link" :class="{ active: activeSection === 'home' }">
-          Home
-        </NuxtLink>
+        <li>
+          <NuxtLink to="/#home" class="nav-link" :class="{ active: activeSection === 'home' }">
+            Home
+          </NuxtLink>
+        </li>
         <li>
           <a href="#tech" class="nav-link" :class="{ active: activeSection === 'tech' }"
             >Tech Stack</a
@@ -130,7 +132,7 @@ onMounted(() => {
 }
 
 .nav-link {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   font-size: 1rem;
@@ -138,7 +140,7 @@ onMounted(() => {
 }
 
 .nav-link:hover {
-  color: var(--color-white);
+  color: var(--color-heading);
 }
 
 .nav-link.active {
@@ -157,7 +159,7 @@ onMounted(() => {
 }
 
 .brackets {
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .name {
@@ -172,14 +174,14 @@ onMounted(() => {
 }
 
 .header-socials a {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   transition:
     color var(--duration-base) var(--easing-standard),
     transform var(--duration-base) var(--easing-standard);
 }
 
 .header-socials a:hover {
-  color: var(--color-white);
+  color: var(--color-heading);
   transform: translateY(-2px);
 }
 
