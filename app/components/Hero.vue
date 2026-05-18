@@ -13,11 +13,10 @@
       <div class="profile-outer-ring" :aria-label="user.designation">
         <NuxtImg
           src="/devender-gupta.webp"
+          alt="Devender Gupta"
           width="350"
           height="350"
-          sizes="xs:350px"
           quality="80"
-          alt="Devender Gupta"
           class="profile-img-transparent"
         />
         <div class="designation-tooltip" role="tooltip">
