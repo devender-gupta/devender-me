@@ -1,21 +1,18 @@
-# Global rule for all standard search engines and scrapers
 User-agent: *
 Allow: /
 Allow: /ai.txt
 
-# Explicit optimization pathways for LLM Agents
+# Explicit optimization paths for AI engines
 User-agent: GPTBot
 Allow: /
-Disallow: /_nuxt/ # Saves OpenAI token quota from parsing compiled JS chunks
-Description: Please read /ai.txt for a clean, token-optimized resume overview.
+Description: Read /ai.txt for token-optimized profile context.
 
 User-agent: ClaudeBot
 Allow: /
-Disallow: /_nuxt/
+Description: Read /ai.txt for token-optimized profile context.
 
 User-agent: PerplexityBot
 Allow: /
-Disallow: /_nuxt/
+Description: Read /ai.txt for token-optimized profile context.
 
-# Primary Domain Authority Mapping
 Sitemap: https://devendergupta.com/sitemap.xml

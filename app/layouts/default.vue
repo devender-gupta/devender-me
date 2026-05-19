@@ -10,6 +10,39 @@
   </div>
 </template>
 
+<script setup>
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Devender Gupta",
+        jobTitle: "Lead Full-Stack Engineer",
+        url: "https://devendergupta.com",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Kochi",
+          addressRegion: "Kerala",
+          addressCountry: "India"
+        },
+        knowsAbout: [
+          "Laravel",
+          "Nuxt.js",
+          "Vue.js",
+          "React.js",
+          "Node.js",
+          "MySQL",
+          "SaaS Architecture",
+          "Web Performance"
+        ]
+      })
+    }
+  ]
+})
+</script>
+
 <style scoped>
 .app-container {
   display: flex;
