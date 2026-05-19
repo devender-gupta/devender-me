@@ -38,6 +38,13 @@ export default defineNuxtConfig({
       ]
     }
   },
+  routeRules: {
+    "/": {
+      headers: {
+        Link: "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\""
+      }
+    }
+  },
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
   modules: [
     "@nuxt/content",

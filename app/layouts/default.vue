@@ -11,6 +11,30 @@
 </template>
 
 <script setup>
+const { data: user } = await useAsyncData("user-layout", () => queryCollection("user").first())
+const { data: experiences } = await useAsyncData("experiences-layout", () =>
+  queryCollection("experiences").order("id", "DESC").all()
+)
+
+const location = computed(() => {
+  const latestExperience = experiences.value?.[0]
+  const value = latestExperience?.location
+  if (typeof value === "string" && value.trim().length > 0) {
+    return value
+  }
+  return "Kochi, Kerala, India"
+})
+
+const knowsAbout = computed(() => {
+  const stack = user.value?.tech_stack
+  if (!Array.isArray(stack)) {
+    return []
+  }
+  return stack
+    .map((item) => item?.name)
+    .filter((name) => typeof name === "string" && name.trim().length > 0)
+})
+
 useHead({
   script: [
     {
@@ -18,25 +42,16 @@ useHead({
       children: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
-        name: "Devender Gupta",
-        jobTitle: "Lead Full-Stack Engineer",
+        name: user.value?.name ?? "Devender Gupta",
+        jobTitle: user.value?.designation ?? "Full Stack Engineer",
         url: "https://devendergupta.com",
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Kochi",
-          addressRegion: "Kerala",
+          addressLocality: location.value.split(",")[0]?.trim() ?? "Kochi",
+          addressRegion: location.value.split(",")[1]?.trim() ?? "Kerala",
           addressCountry: "India"
         },
-        knowsAbout: [
-          "Laravel",
-          "Nuxt.js",
-          "Vue.js",
-          "React.js",
-          "Node.js",
-          "MySQL",
-          "SaaS Architecture",
-          "Web Performance"
-        ]
+        knowsAbout: knowsAbout.value
       })
     }
   ]
