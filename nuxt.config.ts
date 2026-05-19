@@ -39,13 +39,24 @@ export default defineNuxtConfig({
     }
   },
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
-  modules: ["@nuxt/content", "@nuxt/icon", "@nuxt/image", "@nuxt/eslint", "@nuxtjs/color-mode"],
+  modules: [
+    "@nuxt/content",
+    "@nuxt/icon",
+    "@nuxt/image",
+    "@nuxt/eslint",
+    "@nuxtjs/color-mode",
+    "@nuxtjs/sitemap"
+  ],
   devtools: { enabled: import.meta.dev },
   future: { compatibilityVersion: 4 },
   compatibilityDate: "2026-05-13",
   icon: {
     mode: "css",
     cssLayer: "base"
+  },
+  site: {
+    url: "https://devendergupta.com",
+    name: "Devender Gupta | Full Stack Engineer"
   },
   colorMode: {
     preference: "system",

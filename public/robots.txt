@@ -1,5 +1,21 @@
-# public/robots.txt
+# Global rule for all standard search engines and scrapers
 User-agent: *
 Allow: /
+Allow: /ai.txt
 
-Sitemap: https://devender.me/sitemap.xml
+# Explicit optimization pathways for LLM Agents
+User-agent: GPTBot
+Allow: /
+Disallow: /_nuxt/ # Saves OpenAI token quota from parsing compiled JS chunks
+Description: Please read /ai.txt for a clean, token-optimized resume overview.
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /_nuxt/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /_nuxt/
+
+# Primary Domain Authority Mapping
+Sitemap: https://devendergupta.com/sitemap.xml
