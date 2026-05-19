@@ -1,19 +1,18 @@
 User-agent: *
 Allow: /
 Allow: /ai.txt
-Content-Signal: ai-train=no, search=yes, ai-input=no
+
+# Content-Signal: ai-train=no, search=yes, ai-input=no
 
 # Explicit optimization paths for AI engines
+# Read /ai.txt for token-optimized profile context.
 User-agent: GPTBot
 Allow: /
-Description: Read /ai.txt for token-optimized profile context.
 
 User-agent: ClaudeBot
 Allow: /
-Description: Read /ai.txt for token-optimized profile context.
 
 User-agent: PerplexityBot
 Allow: /
-Description: Read /ai.txt for token-optimized profile context.
 
 Sitemap: https://devendergupta.com/sitemap.xml
