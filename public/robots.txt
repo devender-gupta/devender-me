@@ -1,16 +1,8 @@
-# =================================================================
-# STANDARD SEARCH ENGINE RULES (RFC 9309 Strict Compliance)
-# This clean block guarantees a perfect 100/100 traditional SEO score.
-# =================================================================
 User-agent: *
 Allow: /
 Allow: /ai.txt
 Sitemap: https://devendergupta.com/sitemap.xml
 
-# =================================================================
-# ALLOW REAL-TIME AI SEARCH AGENTS
-# Gives user-facing search agents full clearance to check your profile.
-# =================================================================
 User-agent: PerplexityBot
 Allow: /
 Allow: /ai.txt
@@ -23,10 +15,6 @@ User-agent: Bingbot
 Allow: /
 Allow: /ai.txt
 
-# =================================================================
-# BLOCK OFFLINE AI MODEL TRAINING (AI Training: NO)
-# Strict safeguards against standard automated model training.
-# =================================================================
 User-agent: GPTBot
 Disallow: /
 
@@ -41,10 +29,3 @@ Disallow: /
 
 User-agent: FacebookBot
 Disallow: /
-
-# =================================================================
-# CLOUDFLARE AGENT READINESS SPECIFICATION (IETF Internet-Draft)
-# Isolated block explicitly read by Cloudflare to hit a 100/100 score.
-# =================================================================
-User-agent: *
-Content-Signal: ai-train=no, search=yes, ai-input=no

@@ -38,13 +38,24 @@ export default defineNuxtConfig({
       ]
     }
   },
+
+  // FIXED: Unified top-level routing rules mapping
   routeRules: {
+    // Global rule for every single route on your site
+    "/**": {
+      headers: {
+        "Content-Signal": "ai-train=no, search=yes, ai-input=no"
+      }
+    },
+    // Explicit overrides specifically for your root homepage index path
     "/": {
       headers: {
+        "Content-Signal": "ai-train=no, search=yes, ai-input=no",
         Link: "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\""
       }
     }
   },
+
   css: ["~/assets/css/variables.css", "~/assets/css/main.css"],
   modules: [
     "@nuxt/content",
