@@ -1,18 +1,37 @@
+# =================================================================
+# STANDARD SEARCH ENGINE RULES
+# Allows normal search engines to index everything seamlessly.
+# =================================================================
 User-agent: *
 Allow: /
 Allow: /ai.txt
+Sitemap: https://devendergupta.com/sitemap.xml
 
-# Content-Signal: ai-train=no, search=yes, ai-input=no
-
-# Explicit optimization paths for AI engines
-# Read /ai.txt for token-optimized profile context.
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
+# =================================================================
+# PERMISSIVE AI SEARCH AGENTS
+# Allows real-time search discovery engines to scan your profile info.
+# =================================================================
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://devendergupta.com/sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+# =================================================================
+# STRICT AI TRAINING BOT BLOCKS
+# Explicitly blocks LLM training scrapers from parsing your work.
+# =================================================================
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
