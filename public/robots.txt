@@ -1,37 +1,35 @@
-# =================================================================
-# STANDARD SEARCH ENGINE RULES
-# Allows normal search engines to index everything seamlessly.
-# =================================================================
+# As a condition of accessing this website, you agree to abide by
+# the following content signals:
+#
+# (a) If a content-signal = yes, you may collect content for the
+#     corresponding use.
+# (b) If a content-signal = no, you may not collect content for
+#     the corresponding use.
+#
+# The content signals and their meanings are:
+#
+# search:   building a search index and providing search results.
+# ai-input: inputting content into one or more AI models (e.g., RAG,
+#           grounding, or other real-time generative AI uses).
+# ai-train: training or fine-tuning AI models.
+
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /ai.txt
-Sitemap: https://devendergupta.com/sitemap.xml
 
-# =================================================================
-# PERMISSIVE AI SEARCH AGENTS
-# Allows real-time search discovery engines to scan your profile info.
-# =================================================================
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-# =================================================================
-# STRICT AI TRAINING BOT BLOCKS
-# Explicitly blocks LLM training scrapers from parsing your work.
-# =================================================================
+# Explicit optimization paths for AI engines
+# Read /ai.txt for token-optimized profile context.
 User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
+Content-Signal: ai-train=no, search=yes, ai-input=no
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Content-Signal: ai-train=no, search=yes, ai-input=no
+Allow: /
 
-User-agent: Google-Extended
-Disallow: /
+User-agent: PerplexityBot
+Content-Signal: ai-train=no, search=yes, ai-input=no
+Allow: /
 
-User-agent: FacebookBot
-Disallow: /
+Sitemap: https://devendergupta.com/sitemap.xml
