@@ -1,17 +1,21 @@
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /ai.txt
 Sitemap: https://devendergupta.com/sitemap.xml
 
 User-agent: PerplexityBot
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /ai.txt
 
 User-agent: OAI-SearchBot
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /ai.txt
 
 User-agent: Bingbot
+Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 Allow: /ai.txt
 
