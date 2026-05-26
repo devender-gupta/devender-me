@@ -22,28 +22,52 @@ export default defineEventHandler(async (event) => {
     const designation = (user?.designation as string) ?? "Full Stack Engineer"
     const summary = (user?.summary as string) ?? (user?.description as string) ?? ""
 
+    const techStack = user?.tech_stack as Array<{ name: string }> | undefined
+    const techList = Array.isArray(techStack) ? techStack.map((t) => t.name).join(", ") : ""
+
+    const education = user?.education as
+      | Array<{ degree: string; institution: string; date: string }>
+      | undefined
+    const educationContext = Array.isArray(education)
+      ? education.map((e) => `- ${e.degree} at ${e.institution} (${e.date})`).join("\n")
+      : ""
+
     const experienceContext = experiences
       .map((item) => {
-        const meta = item.meta as Record<string, unknown> | undefined
-        return `- ${item.company ?? meta?.company}: ${item.position ?? item.title} (${item.date ?? meta?.date})`
+        const lines = [`Company: ${item.company}, Role: ${item.position} (${item.date})`]
+        if (item.location) lines.push(`  Location: ${item.location}`)
+        return lines.join("\n")
       })
-      .join("\n")
+      .join("\n\n")
 
     const projectContext = projects
       .map((item) => {
-        const meta = item.meta as Record<string, unknown> | undefined
-        const tech = item.tech ?? meta?.tech
-        return `- ${item.title}: Using ${Array.isArray(tech) ? tech.join(", ") : "Web Stack"}`
+        const tech = item.tech as string[] | undefined
+        const roles = item.roles as string[] | undefined
+        const achievements = item.achievements as string[] | undefined
+        const lines = [`Project: ${item.title} (${item.date})`]
+        if (item.description) lines.push(`  Description: ${item.description}`)
+        if (Array.isArray(tech) && tech.length) lines.push(`  Tech: ${tech.join(", ")}`)
+        if (Array.isArray(roles) && roles.length)
+          lines.push(`  Responsibilities:\n${roles.map((r) => `    - ${r}`).join("\n")}`)
+        if (Array.isArray(achievements) && achievements.length)
+          lines.push(`  Achievements:\n${achievements.map((a) => `    - ${a}`).join("\n")}`)
+        return lines.join("\n")
       })
-      .join("\n")
+      .join("\n\n")
 
     // 2. Format your resume intelligence instructions
     const systemPrompt = `
       You are an elite AI Career Assistant representing ${name}, a highly skilled ${designation}.
-      Answer recruiter queries concisely, accurately, and professionally based strictly on the provided context below.
+      Answer recruiter queries accurately and professionally based strictly on the provided context below.
+      Be specific — reference actual project names, technologies, responsibilities, and achievements when relevant.
       
-      ABOUT DEVENDER:
+      ABOUT ${name.toUpperCase()}:
       ${summary}
+
+      ${techList ? `CORE TECH STACK:\n${techList}` : ""}
+
+      ${educationContext ? `EDUCATION:\n${educationContext}` : ""}
 
       CAREER HISTORY & EXPERIENCE:
       ${experienceContext}
@@ -52,8 +76,10 @@ export default defineEventHandler(async (event) => {
       ${projectContext}
 
       RULES:
-      - Answer directly, confidently, and politely. Keep responses crisp.
-      - Do not make up any information. If a skill or project isn't mentioned above, encourage them to reach out to Devender directly.
+      - Format responses using Markdown: use **bold** for emphasis, bullet lists for multiple items, and inline code for technology names.
+      - Be specific and cite concrete details (project names, tech, dates, achievements) whenever available.
+      - Do not make up any information not present above. If something is not covered, encourage them to reach out to ${name} directly.
+      - Keep answers professional and substantive.
     `
 
     // 3. Fetch from the FREE GitHub Models Endpoint
@@ -73,7 +99,7 @@ export default defineEventHandler(async (event) => {
     })) as { choices: Array<{ message: { content: string } }> }
 
     return {
-      message: response.choices[0].message.content
+      message: response?.choices[0]?.message.content
     }
   } catch (error: unknown) {
     const message =

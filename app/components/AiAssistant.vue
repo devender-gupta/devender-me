@@ -13,7 +13,8 @@
 
       <div ref="chatContainer" class="chat-messages">
         <div v-for="(msg, index) in messages" :key="index" :class="['message-bubble', msg.role]">
-          <p>{{ msg.content }}</p>
+          <MDC v-if="msg.role === 'assistant'" :value="msg.content" tag="div" />
+          <p v-else>{{ msg.content }}</p>
         </div>
         <div v-if="isLoading" class="message-bubble assistant loading">
           <p>Typing...</p>
@@ -191,6 +192,52 @@ const sendMessage = async () => {
 
 .message-bubble p {
   margin: 0;
+}
+
+/* Markdown rendered inside assistant bubbles */
+.message-bubble.assistant :deep(p) {
+  margin: 0 0 var(--space-2);
+}
+
+.message-bubble.assistant :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.message-bubble.assistant :deep(ul),
+.message-bubble.assistant :deep(ol) {
+  margin: var(--space-1) 0 var(--space-2) var(--space-4);
+  padding: 0;
+}
+
+.message-bubble.assistant :deep(li) {
+  margin-bottom: var(--space-1);
+  line-height: 1.5;
+}
+
+.message-bubble.assistant :deep(strong) {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.message-bubble.assistant :deep(code) {
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  background: var(--color-surface-muted);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+}
+
+.message-bubble.assistant :deep(pre) {
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  overflow-x: auto;
+  margin: var(--space-2) 0;
+}
+
+.message-bubble.assistant :deep(pre code) {
+  background: none;
+  padding: 0;
 }
 
 .loading {
