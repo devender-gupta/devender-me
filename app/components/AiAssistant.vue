@@ -1,36 +1,66 @@
 <template>
   <div class="ai-assistant-wrapper">
-    <button class="chat-toggle-btn" aria-label="Toggle AI Assistant" @click="isOpen = !isOpen">
-      <span v-if="!isOpen">💬</span>
-      <span v-else>✕</span>
+    <button
+      class="chat-toggle-btn"
+      :aria-label="isOpen ? 'Close AI Assistant' : 'Open AI Assistant'"
+      @click="toggleChat"
+    >
+      <Transition name="icon-swap" mode="out-in">
+        <span v-if="!isOpen" key="open">💬</span>
+        <span v-else key="close">✕</span>
+      </Transition>
     </button>
 
-    <div v-if="isOpen" class="chat-window">
-      <div class="chat-header">
-        <h3>Devender's AI Assistant</h3>
-        <p>Ask anything about my stack or history</p>
-      </div>
-
-      <div ref="chatContainer" class="chat-messages">
-        <div v-for="(msg, index) in messages" :key="index" :class="['message-bubble', msg.role]">
-          <MDC v-if="msg.role === 'assistant'" :value="msg.content" tag="div" />
-          <p v-else>{{ msg.content }}</p>
+    <Transition name="chat-window">
+      <div v-show="isOpen" class="chat-window" aria-label="AI Assistant">
+        <div class="chat-header">
+          <h3>Devender's AI Assistant</h3>
+          <p>Ask anything about his stack or experience</p>
         </div>
-        <div v-if="isLoading" class="message-bubble assistant loading">
-          <p>Typing...</p>
-        </div>
-      </div>
 
-      <form class="chat-input-area" @submit.prevent="sendMessage">
-        <input
-          v-model="userInput"
-          type="text"
-          placeholder="e.g., Does he know Node.js?"
-          :disabled="isLoading"
-        >
-        <button type="submit" :disabled="isLoading || !userInput.trim()">Send</button>
-      </form>
-    </div>
+        <div ref="chatContainer" class="chat-messages">
+          <TransitionGroup name="bubble" tag="div" class="bubble-list">
+            <div
+              v-for="(msg, index) in messages"
+              :key="index"
+              :class="['message-bubble', msg.role]"
+            >
+              <MDC v-if="msg.role === 'assistant'" :value="msg.content" tag="div" />
+              <p v-else>{{ msg.content }}</p>
+            </div>
+
+            <div v-if="isLoading" key="loading" class="message-bubble assistant loading">
+              <span class="dot" />
+              <span class="dot" />
+              <span class="dot" />
+            </div>
+          </TransitionGroup>
+        </div>
+
+        <form class="chat-input-area" @submit.prevent="sendMessage">
+          <input
+            ref="inputRef"
+            v-model="userInput"
+            type="text"
+            placeholder="Ask something…"
+            maxlength="300"
+            :disabled="isLoading"
+            @keydown.enter.prevent="sendMessage"
+          >
+          <button type="submit" :disabled="isLoading || !userInput.trim()" aria-label="Send">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -39,6 +69,7 @@ const isOpen = ref(false)
 const isLoading = ref(false)
 const userInput = ref("")
 const chatContainer = ref(null)
+const inputRef = ref(null)
 
 const messages = ref([
   {
@@ -48,7 +79,15 @@ const messages = ref([
   }
 ])
 
-// Auto-scroll logic to focus on fresh replies
+const toggleChat = async () => {
+  isOpen.value = !isOpen.value
+  if (isOpen.value) {
+    await nextTick()
+    inputRef.value?.focus()
+    scrollToBottom()
+  }
+}
+
 const scrollToBottom = async () => {
   await nextTick()
   if (chatContainer.value) {
@@ -62,13 +101,11 @@ const sendMessage = async () => {
   const userText = userInput.value.trim()
   userInput.value = ""
 
-  // Push user message to UI track
   messages.value.push({ role: "user", content: userText })
   isLoading.value = true
   await scrollToBottom()
 
   try {
-    // Send full conversational chain structure up to our server handler
     const data = await $fetch("/api/chat", {
       method: "POST",
       body: {
@@ -92,6 +129,7 @@ const sendMessage = async () => {
 </script>
 
 <style scoped>
+/* ── Layout ─────────────────────────────────────────── */
 .ai-assistant-wrapper {
   position: fixed;
   bottom: var(--space-6);
@@ -100,6 +138,7 @@ const sendMessage = async () => {
   font-family: var(--font-family-base);
 }
 
+/* ── Toggle button ───────────────────────────────────── */
 .chat-toggle-btn {
   width: 56px;
   height: 56px;
@@ -107,7 +146,7 @@ const sendMessage = async () => {
   background: var(--gradient-brand);
   color: #fff;
   border: none;
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   box-shadow: var(--shadow-primary);
   display: flex;
@@ -119,16 +158,33 @@ const sendMessage = async () => {
 }
 
 .chat-toggle-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
   box-shadow: var(--shadow-primary-hover);
 }
 
+/* icon swap inside button */
+.icon-swap-enter-active,
+.icon-swap-leave-active {
+  transition: all 0.15s var(--easing-standard);
+}
+
+.icon-swap-enter-from {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.icon-swap-leave-to {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+/* ── Chat window open/close ──────────────────────────── */
 .chat-window {
   position: absolute;
   bottom: 72px;
   right: 0;
   width: 340px;
-  height: 450px;
+  height: 470px;
   background: var(--color-surface);
   border: var(--border-strong);
   border-radius: var(--radius-lg);
@@ -136,12 +192,29 @@ const sendMessage = async () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transform-origin: bottom right;
 }
 
+.chat-window-enter-active {
+  transition: all 0.25s var(--easing-standard);
+}
+
+.chat-window-leave-active {
+  transition: all 0.2s var(--easing-standard);
+}
+
+.chat-window-enter-from,
+.chat-window-leave-to {
+  opacity: 0;
+  transform: scale(0.85) translateY(16px);
+}
+
+/* ── Header ──────────────────────────────────────────── */
 .chat-header {
   padding: var(--space-4);
   background: var(--color-bg);
   border-bottom: var(--border-strong);
+  flex-shrink: 0;
 }
 
 .chat-header h3 {
@@ -150,6 +223,7 @@ const sendMessage = async () => {
   font-weight: var(--font-weight-semibold);
   background: var(--gradient-brand);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -159,17 +233,41 @@ const sendMessage = async () => {
   color: var(--color-text-muted);
 }
 
+/* ── Message list ────────────────────────────────────── */
 .chat-messages {
   flex: 1;
   padding: var(--space-4);
   overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.bubble-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
+/* bubble slide-in */
+.bubble-enter-active {
+  transition: all 0.22s var(--easing-standard);
+}
+
+.bubble-leave-active {
+  transition: all 0.15s var(--easing-standard);
+  position: absolute;
+}
+
+.bubble-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.bubble-leave-to {
+  opacity: 0;
+}
+
 .message-bubble {
-  max-width: 80%;
+  max-width: 82%;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   font-size: 0.875rem;
@@ -194,7 +292,7 @@ const sendMessage = async () => {
   margin: 0;
 }
 
-/* Markdown rendered inside assistant bubbles */
+/* Markdown inside assistant bubbles */
 .message-bubble.assistant :deep(p) {
   margin: 0 0 var(--space-2);
 }
@@ -240,17 +338,56 @@ const sendMessage = async () => {
   padding: 0;
 }
 
+/* ── Typing indicator ────────────────────────────────── */
 .loading {
-  color: var(--color-text-dim);
-  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-3);
 }
 
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text-muted);
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+/* ── Input area ──────────────────────────────────────── */
 .chat-input-area {
   padding: var(--space-3);
   background: var(--color-bg);
   border-top: var(--border-strong);
   display: flex;
   gap: var(--space-2);
+  flex-shrink: 0;
 }
 
 .chat-input-area input {
@@ -274,17 +411,26 @@ const sendMessage = async () => {
   background: var(--gradient-brand);
   color: #fff;
   border: none;
-  padding: var(--space-2) var(--space-3);
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
   border-radius: var(--radius-sm);
-  font-weight: var(--font-weight-medium);
-  font-family: var(--font-family-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: opacity var(--duration-fast) var(--easing-standard);
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
+}
+
+.chat-input-area button:hover:not(:disabled) {
+  transform: scale(1.05);
 }
 
 .chat-input-area button:disabled {
   background: var(--color-surface-muted);
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 </style>
