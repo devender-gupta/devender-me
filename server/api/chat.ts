@@ -97,6 +97,13 @@ export default defineEventHandler(async (event) => {
 
     // 6. Securely execute payload call against free GitHub Models inference gateway
     const config = useRuntimeConfig()
+    if (!config.githubToken) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Server is missing GITHUB_TOKEN configuration."
+      })
+    }
+
     const response = await $fetch<{ choices: Array<{ message: { content: string } }> }>(
       "https://models.inference.ai.azure.com/chat/completions",
       {
