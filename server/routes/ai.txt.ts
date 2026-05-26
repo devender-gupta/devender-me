@@ -24,7 +24,6 @@ export default defineEventHandler(async (event) => {
     (user?.description as string) ??
     ""
   const email = (user?.email as string) ?? (userMeta?.email as string) ?? ""
-  const phone = (user?.phone as string) ?? (userMeta?.phone as string) ?? ""
   const github = (user?.github_link as string) ?? (userMeta?.github_link as string) ?? ""
   const linkedin = (user?.linkedin_link as string) ?? (userMeta?.linkedin_link as string) ?? ""
   const stackoverflow =
@@ -73,7 +72,6 @@ export default defineEventHandler(async (event) => {
     `${name.toUpperCase()} | ${designation.toUpperCase()}`,
     summary ? `Summary: ${summary}` : "",
     email ? `Email: ${email}` : "",
-    phone ? `Phone: ${phone}` : "",
     "Website: https://devendergupta.com",
     "",
     "=========================================",

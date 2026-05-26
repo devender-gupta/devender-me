@@ -1,7 +1,6 @@
 ---
 name: "Devender Gupta"
 email: "devender.gupta.me@gmail.com"
-phone: "+91 9745354263"
 designation: "Full Stack Engineer"
 introduction: "I build scalable web ecosystems."
 summary: "Lead Full-Stack Engineer with 7+ years of experience building, scaling, and maintaining production-grade SaaS platforms and high-traffic web applications used by thousands of real users."

@@ -83,5 +83,8 @@ export default defineNuxtConfig({
   },
   features: {
     inlineStyles: true
+  },
+  runtimeConfig: {
+    githubToken: process.env.GITHUB_TOKEN // Placed securely on the server layer
   }
 })

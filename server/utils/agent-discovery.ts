@@ -6,7 +6,6 @@ export const siteProfile = {
   summary:
     "Lead Full-Stack Engineer with 7+ years of experience building, scaling, and maintaining production-grade SaaS platforms and high-traffic web applications used by thousands of real users.",
   email: "devender.gupta.me@gmail.com",
-  phone: "+91 9745354263",
   github: "https://github.com/devender-gupta",
   linkedin: "https://www.linkedin.com/in/devender-gupta",
   stackoverflow: "https://stackoverflow.com/users/8053641/devender-gupta",

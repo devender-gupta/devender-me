@@ -84,7 +84,7 @@ Schemas are defined in `content.config.ts`.
 
 Required fields:
 
-- `name`, `email`, `phone`, `designation`
+- `name`, `email`, `designation`
 - `introduction`, `summary`
 - `brand.first`, `brand.last`
 - `github_link`, `linkedin_link`
