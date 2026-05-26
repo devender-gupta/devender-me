@@ -27,9 +27,9 @@ export default defineEventHandler(async (event) => {
     const designation = user?.designation ?? "Full Stack Engineer"
     const summary = user?.summary ?? ""
 
-    const email = (user?.email as string) ?? userMeta?.email ?? ""
-    const github = (user?.github_link as string) ?? userMeta?.github_link ?? ""
-    const linkedin = (user?.linkedin_link as string) ?? userMeta?.linkedin_link ?? ""
+    const email = user?.email ?? ""
+    const github = user?.github_link ?? ""
+    const linkedin = user?.linkedin_link ?? ""
 
     // 3. Compile experiences with full typed fields
     const experienceContext = experiences
