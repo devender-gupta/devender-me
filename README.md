@@ -2,102 +2,172 @@
 
 Personal portfolio website built with Nuxt 4 and Nuxt Content 3.
 
-The production site is configured around `https://devendergupta.com`.
-
-Live content is driven from Markdown files in the `content/` directory and rendered into sections for hero, tech stack, projects, about, and contact.
+Live at **[devendergupta.com](https://devendergupta.com)**. Content is driven entirely from Markdown files in the `content/` directory.
 
 ## Tech Stack
 
-- Nuxt 4
-- Vue 3
-- Nuxt Content 3
-- Nuxt Image
-- Nuxt Icon (Iconify)
-- @nuxtjs/color-mode
-- ESLint + Prettier + Husky + lint-staged
+- **Nuxt 4** (Compatibility Version 4, `future.compatibilityVersion: 4`)
+- **Vue 3** with Composition API
+- **Nuxt Content 3** — SQLite-backed content collections (`better-sqlite3`)
+- **Nuxt Icon** — Iconify icon sets (`uil`, `logos`, `ion`)
+- **Nuxt Image** — optimised `<NuxtImg>` component
+- **@nuxtjs/color-mode** — system-preference dark/light toggle, no class suffix
+- **@nuxtjs/sitemap** — auto-generated sitemap
+- **ESLint + Prettier + Husky + lint-staged** — enforced code quality on every commit
 
 ## Features
 
-- Content-driven portfolio data (user profile, projects, work experience)
-- Responsive single-page layout with anchor navigation
-- Dark/light color mode support
-- SEO metadata and social sharing tags
-- PWA basics via `site.webmanifest` and favicon set
-- Optimized images through `NuxtImg`
+- Content-driven portfolio: user profile, work history, and projects all sourced from Markdown
+- Responsive single-page layout with smooth anchor navigation and active section tracking
+- Dark/light color mode with instant theme switching
+- AI chat assistant powered by GitHub Models (`gpt-4o-mini`) via a Nuxt server API route
+- Agent/AI discoverability: `ai.txt`, OpenAPI spec, `.well-known/api-catalog`, `Content-Signal` headers, and a WebMCP client plugin
+- SEO metadata, Open Graph tags, canonical URL, and sitemap
+- PWA basics via `site.webmanifest` and a full favicon set
+- Markdown content in the chat assistant rendered with `<MDC>` (formatted lists, bold, code blocks)
 
 ## Project Structure
 
 ```text
 app/
-	components/      # UI sections and reusable components
-	layouts/         # default app layout
-	pages/           # route entry points
+  assets/css/          # CSS custom properties (variables.css) and global styles (main.css)
+  components/          # UI sections: Hero, TechStack, Projects, AboutMe, ContactSection,
+  │                    #   AppHeader, AppFooter, AiAssistant, ThemeSwitcher, AppIcon, ProjectCard
+  layouts/default.vue  # Root layout wrapping all pages
+  pages/
+    index.vue          # Main portfolio page (all sections)
+    docs/api.vue       # Human-readable API docs page
+  plugins/
+    webmcp.client.ts   # WebMCP context provider (client-side, AI browser integration)
 content/
-	user.md          # personal info and brand/social links
-	projects/*.md    # featured project entries
-	experiences/*.md # work history entries
-public/
-	favicon*         # favicon assets
-	site.webmanifest # web app manifest
-	og-preview.png   # Open Graph preview image
-content.config.ts  # Nuxt Content collection schemas
-nuxt.config.ts     # app head/meta/modules/runtime config
+  user.md              # Personal info, brand, social links, tech stack, education
+  projects/*.md        # Featured project entries (title, tech, roles, achievements)
+  experiences/*.md     # Work history entries (company, position, date, location)
+server/
+  api/
+    chat.ts            # POST /api/chat — AI assistant endpoint (GitHub Models)
+  middleware/
+    agent-discovery.ts # Injects Link headers; serves text/markdown on Accept negotiation
+  routes/
+    ai.txt.ts          # GET /ai.txt — AI crawler policy file
+    openapi.json.ts    # GET /openapi.json — OpenAPI specification
+    api/
+      health.get.ts    # GET /api/health — health check endpoint
+  utils/
+    agent-discovery.ts # Shared helpers for OpenAPI doc and homepage Markdown generation
+content.config.ts      # Nuxt Content collection schemas (Zod)
+nuxt.config.ts         # Modules, head/meta, routeRules, runtimeConfig, color-mode
 ```
 
 ## Prerequisites
 
-- Node.js 20+
-- npm 10+
+- **Node.js 20+** (Node 22 recommended — required by `eslint-flat-config-utils`)
+- **npm 10+**
 
-Nuxt Content uses SQLite under the hood (`better-sqlite3`), so your machine must be able to build native Node modules.
+Nuxt Content uses `better-sqlite3`, which requires native module compilation. Ensure your environment can build native Node addons (Xcode CLT on macOS, `build-essential` on Linux).
 
 ## Getting Started
 
-Install dependencies:
-
 ```bash
 npm install
+npm run dev        # http://localhost:3000
 ```
-
-Start development server:
-
-```bash
-npm run dev
-```
-
-App runs at `http://localhost:3000` by default.
 
 ## Available Scripts
 
-- `npm run dev` - Start local development server
-- `npm run build` - Build production server bundle
-- `npm run preview` - Run production preview
-- `npm run generate` - Generate static output
-- `npm run lint` - Run ESLint
-- `npm run format` - Format files with Prettier
+| Script             | Description                    |
+| ------------------ | ------------------------------ |
+| `npm run dev`      | Start local development server |
+| `npm run build`    | Build production server bundle |
+| `npm run preview`  | Run production preview locally |
+| `npm run generate` | Generate fully static output   |
+| `npm run lint`     | Run ESLint across the project  |
+| `npm run format`   | Format all files with Prettier |
+
+## Environment Variables
+
+Create a `.env` file at the project root:
+
+```env
+GITHUB_TOKEN=your_github_pat_here
+```
+
+| Variable       | Required          | Description                                                                                                                                                     |
+| -------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GITHUB_TOKEN` | Yes (for AI chat) | GitHub Personal Access Token used to call the GitHub Models inference API (`gpt-4o-mini`). Needs no special scopes — a classic token with no permissions works. |
+
+Without `GITHUB_TOKEN`, the portfolio renders fully but the AI chat assistant will return a `500` error.
 
 ## Content Model
 
-Schemas are defined in `content.config.ts`.
+Schemas are defined and validated in `content.config.ts` using Zod.
 
-### `user` collection (`content/user.md`)
+### `user` collection — `content/user.md`
 
-Required fields:
+| Field                                                | Type         | Required |
+| ---------------------------------------------------- | ------------ | -------- |
+| `name`                                               | string       | ✓        |
+| `email`                                              | email string | ✓        |
+| `phone`                                              | string       | ✓        |
+| `designation`                                        | string       | ✓        |
+| `introduction`                                       | string       | ✓        |
+| `summary`                                            | string       | ✓        |
+| `brand.first`, `brand.last`                          | string       | ✓        |
+| `github_link`, `linkedin_link`, `stackoverflow_link` | URL          | ✓        |
+| `education[].institution`, `.degree`, `.date`        | string       | ✓        |
+| `tech_stack[].name`, `.icon`                         | string       | optional |
 
-- `name`, `email`, `designation`
-- `introduction`, `summary`
-- `brand.first`, `brand.last`
-- `github_link`, `linkedin_link`
-- `education[]` with `institution`, `degree`, `date`
-- Optional `tech_stack[]` with `name`, `icon`
+### `experiences` collection — `content/experiences/*.md`
 
-### `projects` collection (`content/projects/*.md`)
+| Field      | Type                        | Required |
+| ---------- | --------------------------- | -------- |
+| `id`       | string                      | ✓        |
+| `company`  | string                      | ✓        |
+| `position` | string                      | ✓        |
+| `date`     | string                      | ✓        |
+| `location` | string                      | ✓        |
+| `type`     | string (e.g. `"Full Time"`) | ✓        |
 
-Required fields:
+### `projects` collection — `content/projects/*.md`
 
-- `id`, `title`, `company`, `date`
-- `tech[]`, `description`, `roles[]`, `achievements[]`
-- Optional `repo_link`, `preview_link`, `display`
+| Field          | Type                  | Required |
+| -------------- | --------------------- | -------- |
+| `id`           | string                | ✓        |
+| `title`        | string                | ✓        |
+| `company`      | string                | ✓        |
+| `date`         | string                | ✓        |
+| `tech`         | string[]              | ✓        |
+| `description`  | string                | ✓        |
+| `roles`        | string[]              | ✓        |
+| `achievements` | string[]              | ✓        |
+| `repo_link`    | URL                   | optional |
+| `preview_link` | URL                   | optional |
+| `display`      | `"true"` \| `"false"` | optional |
+
+## AI Chat Assistant
+
+The assistant is powered by the GitHub Models free inference endpoint.
+
+- **Endpoint**: `POST /api/chat`
+- **Model**: `gpt-4o-mini` (via `https://models.inference.ai.azure.com`)
+- **Context**: On every request the server fetches the full `user`, `experiences`, and `projects` collections and builds a structured system prompt. The last 20 conversation turns are forwarded for memory.
+- **Rendering**: Assistant responses are rendered as Markdown in the UI via `<MDC>`.
+
+## Agent / AI Discoverability
+
+The site exposes several endpoints to support AI agents and crawlers:
+
+| Endpoint                       | Description                                          |
+| ------------------------------ | ---------------------------------------------------- |
+| `GET /ai.txt`                  | AI crawler policy (training opt-out)                 |
+| `GET /openapi.json`            | OpenAPI 3.1 specification                            |
+| `GET /.well-known/api-catalog` | API catalog discovery                                |
+| `GET /docs/api`                | Human-readable API documentation                     |
+| `GET /api/health`              | Health check                                         |
+| `Link` header on `/`           | Points to api-catalog and service-doc                |
+| `Content-Signal` header        | `ai-train=no, search=yes, ai-input=no` on all routes |
+
+A **WebMCP client plugin** (`app/plugins/webmcp.client.ts`) registers tools with AI-capable browsers via `navigator.modelContext`, enabling in-browser AI agents to navigate portfolio sections directly.
 
 Notes:
 
