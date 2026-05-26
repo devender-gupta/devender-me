@@ -29,7 +29,6 @@ export default defineContentConfig({
       schema: z.object({
         name: z.string(),
         email: z.string().email(),
-        phone: z.string(),
         designation: z.string(),
         introduction: z.string(),
         summary: z.string(),

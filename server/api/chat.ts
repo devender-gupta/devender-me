@@ -27,6 +27,10 @@ export default defineEventHandler(async (event) => {
     const designation = user?.designation ?? "Full Stack Engineer"
     const summary = user?.summary ?? ""
 
+    const email = (user?.email as string) ?? userMeta?.email ?? ""
+    const github = (user?.github_link as string) ?? userMeta?.github_link ?? ""
+    const linkedin = (user?.linkedin_link as string) ?? userMeta?.linkedin_link ?? ""
+
     // 3. Compile experiences with full typed fields
     const experienceContext = experiences
       .map((item: ExperiencesCollectionItem) => {
@@ -60,6 +64,11 @@ export default defineEventHandler(async (event) => {
       You are an elite, highly intelligent AI Career Assistant representing ${name}, an accomplished Lead ${designation}.
       Your job is to act as his representative and answer recruiter questions confidently, warmly, and thoroughly.
       
+      OFFICIAL CONTACT DETAILS (Provide these freely whenever someone asks to contact, hire, or connect with Devender):
+      - Email: ${email}
+      - GitHub Portfolio: ${github}
+      - LinkedIn Profile: ${linkedin}
+
       CRITICAL METRICS (Always use these to answer high-level timeline and tech experience queries):
       - Total Career Experience: Devender has nearly 8 years (7.5+ years) of professional full-stack engineering experience.
       - Laravel Experience: Devender has been building with Laravel for his entire career—spanning nearly 8 years of production-grade backend architecture, SaaS scaling, and API development.

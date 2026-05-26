@@ -12,9 +12,6 @@
         </div>
 
         <div class="footer-info">
-          <a v-if="user?.phone" :href="`tel:${user.phone.replace(/\s+/g, '')}`" class="info-link">
-            {{ user.phone }}
-          </a>
           <a v-if="user?.email" :href="`mailto:${user.email}`" class="info-link">
             {{ user.email }}
           </a>
