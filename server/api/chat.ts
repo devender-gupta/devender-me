@@ -6,10 +6,25 @@ import type {
 
 export default defineEventHandler(async (event) => {
   // 1. Read conversation history from client request payload
-  const body = await readBody(event)
-  const messages = body?.messages || []
+  const body = await readBody<{
+    messages?: Array<{ role: string; content: string }>
+  }>(event)
 
-  if (!messages.length) {
+  const messages = Array.isArray(body?.messages)
+    ? body.messages
+        .filter((m): m is { role: "user" | "assistant"; content: string } => {
+          return (
+            m &&
+            typeof m === "object" &&
+            (m.role === "user" || m.role === "assistant") &&
+            typeof m.content === "string" &&
+            m.content.trim().length > 0
+          )
+        })
+        .slice(-20)
+    : []
+
+  if (messages.length === 0) {
     throw createError({ statusCode: 400, statusMessage: "Messages are required." })
   }
 
