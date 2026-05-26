@@ -1,6 +1,11 @@
-import type { ParsedContent } from "@nuxt/content"
+import type {
+  UserCollectionItem,
+  ExperiencesCollectionItem,
+  ProjectsCollectionItem
+} from "@nuxt/content"
 
 export default defineEventHandler(async (event) => {
+  // 1. Read conversation history from client request payload
   const body = await readBody(event)
   const messages = body?.messages || []
 
@@ -9,101 +14,102 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    // 1. Gather your Nuxt Content v3 data
+    // 2. Fetch full datasets from Nuxt Content collections
     const [userArr, experiences, projects] = await Promise.all([
-      queryCollection(event, "content").where("path", "LIKE", "/user%").all(),
-      queryCollection(event, "content").where("path", "LIKE", "/experiences%").all(),
-      queryCollection(event, "content").where("path", "LIKE", "/projects%").all()
+      queryCollection(event, "user").all(),
+      queryCollection(event, "experiences").all(),
+      queryCollection(event, "projects").all()
     ])
 
-    const user = Array.isArray(userArr) && userArr.length > 0 ? (userArr[0] as ParsedContent) : null
+    const user: UserCollectionItem | null = userArr[0] ?? null
 
-    const name = (user?.name as string) ?? "Devender Gupta"
-    const designation = (user?.designation as string) ?? "Full Stack Engineer"
-    const summary = (user?.summary as string) ?? (user?.description as string) ?? ""
+    const name = user?.name ?? "Devender Gupta"
+    const designation = user?.designation ?? "Full Stack Engineer"
+    const summary = user?.summary ?? ""
 
-    const techStack = user?.tech_stack as Array<{ name: string }> | undefined
-    const techList = Array.isArray(techStack) ? techStack.map((t) => t.name).join(", ") : ""
-
-    const education = user?.education as
-      | Array<{ degree: string; institution: string; date: string }>
-      | undefined
-    const educationContext = Array.isArray(education)
-      ? education.map((e) => `- ${e.degree} at ${e.institution} (${e.date})`).join("\n")
-      : ""
-
+    // 3. Compile experiences with full typed fields
     const experienceContext = experiences
-      .map((item) => {
-        const lines = [`Company: ${item.company}, Role: ${item.position} (${item.date})`]
-        if (item.location) lines.push(`  Location: ${item.location}`)
-        return lines.join("\n")
+      .map((item: ExperiencesCollectionItem) => {
+        return `### POSITION: ${item.position} at ${item.company} (${item.date})\n  Location: ${item.location}\n`
       })
-      .join("\n\n")
+      .join("\n")
 
+    // 4. Compile projects with full typed fields
     const projectContext = projects
-      .map((item) => {
-        const tech = item.tech as string[] | undefined
-        const roles = item.roles as string[] | undefined
-        const achievements = item.achievements as string[] | undefined
-        const lines = [`Project: ${item.title} (${item.date})`]
-        if (item.description) lines.push(`  Description: ${item.description}`)
-        if (Array.isArray(tech) && tech.length) lines.push(`  Tech: ${tech.join(", ")}`)
-        if (Array.isArray(roles) && roles.length)
-          lines.push(`  Responsibilities:\n${roles.map((r) => `    - ${r}`).join("\n")}`)
-        if (Array.isArray(achievements) && achievements.length)
-          lines.push(`  Achievements:\n${achievements.map((a) => `    - ${a}`).join("\n")}`)
-        return lines.join("\n")
+      .map((item: ProjectsCollectionItem) => {
+        const rolesList = item.roles.map((r) => `    - ${r}`).join("\n")
+        const achList = item.achievements.map((a) => `    - ${a}`).join("\n")
+        return [
+          `### PROJECT: ${item.title} (${item.date})`,
+          `  Tech: ${item.tech.join(", ")}`,
+          `  Overview: ${item.description}`,
+          rolesList ? `  Responsibilities:\n${rolesList}` : "",
+          achList ? `  Achievements:\n${achList}` : ""
+        ]
+          .filter(Boolean)
+          .join("\n")
       })
       .join("\n\n")
 
-    // 2. Format your resume intelligence instructions
+    // 5. Construct the deep knowledge-base System Prompt
+    const techList = user?.tech_stack?.map((t) => t.name).join(", ") ?? ""
+    const educationContext =
+      user?.education?.map((e) => `- ${e.degree} at ${e.institution} (${e.date})`).join("\n") ?? ""
+
     const systemPrompt = `
-      You are an elite AI Career Assistant representing ${name}, a highly skilled ${designation}.
-      Answer recruiter queries accurately and professionally based strictly on the provided context below.
-      Be specific — reference actual project names, technologies, responsibilities, and achievements when relevant.
+      You are an elite, highly intelligent AI Career Assistant representing ${name}, an accomplished Lead ${designation}.
+      Your job is to act as his representative and answer recruiter questions confidently, warmly, and thoroughly.
       
-      ABOUT ${name.toUpperCase()}:
+      CRITICAL METRICS (Always use these to answer high-level timeline and tech experience queries):
+      - Total Career Experience: Devender has nearly 8 years (7.5+ years) of professional full-stack engineering experience.
+      - Laravel Experience: Devender has been building with Laravel for his entire career—spanning nearly 8 years of production-grade backend architecture, SaaS scaling, and API development.
+      - Core Framework Stack: Laravel (Senior/Lead level), Node.js, Nuxt.js, Vue.js, React, and MySQL.
+      - Base Location: Kochi, Kerala, India.
+
+      ABOUT DEVENDER:
       ${summary}
 
-      ${techList ? `CORE TECH STACK:\n${techList}` : ""}
+      ${techList ? `CORE TECH STACK:\n      ${techList}` : ""}
 
-      ${educationContext ? `EDUCATION:\n${educationContext}` : ""}
+      ${educationContext ? `EDUCATION:\n      ${educationContext}` : ""}
 
-      CAREER HISTORY & EXPERIENCE:
+      DETAILED EXPERIENCE, ROLES & RESPONSIBILITIES:
       ${experienceContext}
 
-      KEY PORTFOLIO PROJECTS:
+      COMPREHENSIVE PROJECT PORTFOLIO & ACHIEVEMENTS:
       ${projectContext}
 
-      RULES:
-      - Format responses using Markdown: use **bold** for emphasis, bullet lists for multiple items, and inline code for technology names.
-      - Be specific and cite concrete details (project names, tech, dates, achievements) whenever available.
-      - Do not make up any information not present above. If something is not covered, encourage them to reach out to ${name} directly.
-      - Keep answers professional and substantive.
+      RULES & BEHAVIOR CONSTRAINTS:
+      - Answer directly, proudly, and professionally. Speak in the third person or as a designated agent representative.
+      - When asked about specific tool experience (like Laravel or Vue), use the CRITICAL METRICS to confidently state that he has utilized them throughout his entire 8-year career history.
+      - Keep responses clean, readable, and highly organized using bullet points for tool stacks or specific achievements.
+      - Never fabricate information. If an engineering capability or specific project scope is not specified in the data modules above, politely state you lack that explicit telemetry record on hand, but encourage the recruiter to connect with Devender directly via email or LinkedIn.
     `
 
-    // 3. Fetch from the FREE GitHub Models Endpoint
+    // 6. Securely execute payload call against free GitHub Models inference gateway
     const config = useRuntimeConfig()
-    const response = (await $fetch("https://models.inference.ai.azure.com/chat/completions", {
-      method: "POST",
-      headers: {
-        // Authenticates cleanly using your free developer token!
-        Authorization: `Bearer ${config.githubToken}`,
-        "Content-Type": "application/json"
-      },
-      body: {
-        model: "gpt-4o-mini", // Hosted natively inside the GitHub models catalog
-        messages: [{ role: "system", content: systemPrompt }, ...messages],
-        temperature: 0.3
+    const response = await $fetch<{ choices: Array<{ message: { content: string } }> }>(
+      "https://models.inference.ai.azure.com/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.githubToken}`,
+          "Content-Type": "application/json"
+        },
+        body: {
+          model: "gpt-4o-mini",
+          messages: [{ role: "system", content: systemPrompt }, ...messages],
+          temperature: 0.2
+        }
       }
-    })) as { choices: Array<{ message: { content: string } }> }
+    )
 
     return {
-      message: response?.choices[0]?.message.content
+      message: response.choices[0]?.message.content
     }
   } catch (error: unknown) {
     const message =
-      error instanceof Error ? error.message : "Failed to communicate with the GitHub AI Engine."
+      error instanceof Error ? error.message : "Failed to communicate with GitHub AI Core."
     throw createError({
       statusCode: 500,
       statusMessage: message
