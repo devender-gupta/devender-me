@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const name = (user?.name as string) ?? (user?.title as string) ?? "Devender Gupta"
   const designation =
-    (user?.designation as string) ?? (userMeta?.designation as string) ?? "Full Stack Engineer"
+    (user?.designation as string) ?? (userMeta?.designation as string) ?? "Senior Software Engineer"
   const summary =
     (user?.summary as string) ??
     (userMeta?.summary as string) ??

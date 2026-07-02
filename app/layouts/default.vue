@@ -43,7 +43,7 @@ useHead({
         "@context": "https://schema.org",
         "@type": "Person",
         name: user.value?.name ?? "Devender Gupta",
-        jobTitle: user.value?.designation ?? "Full Stack Engineer",
+        jobTitle: user.value?.designation ?? "Senior Software Engineer",
         url: "https://devendergupta.com",
         address: {
           "@type": "PostalAddress",

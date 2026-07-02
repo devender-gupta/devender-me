@@ -3,18 +3,18 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: "en" },
-      title: "Devender Gupta | Full Stack Engineer",
+      title: "Devender Gupta | Senior Software Engineer",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
           name: "description",
           content:
-            "Portfolio of Devender Gupta, a Full Stack Engineer specializing in high-performance web applications using Laravel, NodeJS, VueJS, ReactJS, and MySQL."
+            "Portfolio of Devender Gupta, a Senior Software Engineer specializing in high-performance web applications using Laravel, NodeJS, VueJS, ReactJS, and MySQL."
         },
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://devender.me" },
-        { property: "og:title", content: "Devender Gupta | Full Stack Engineer" },
+        { property: "og:title", content: "Devender Gupta | Senior Software Engineer" },
         {
           property: "og:description",
           content: "Explore the projects and technical expertise of Devender Gupta."
@@ -74,7 +74,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: "https://devendergupta.com",
-    name: "Devender Gupta | Full Stack Engineer"
+    name: "Devender Gupta | Senior Software Engineer"
   },
   colorMode: {
     preference: "system",
