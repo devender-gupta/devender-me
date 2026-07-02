@@ -9,8 +9,8 @@ tech:
   - "WordPress"
 description: "A WordPress site that simplifies apartment hunting by offering easy browsing, detailed floor plans, and scheduling for calls or tours, with comprehensive property information for a personalized experience."
 roles:
-  - "Developing customized plugins and integrating pages."
-  - "Managing releases across all environments."
+  - "Built custom plugins and integrated new pages."
+  - "Managed releases across all environments."
 achievements: []
 display: "false"
 ---

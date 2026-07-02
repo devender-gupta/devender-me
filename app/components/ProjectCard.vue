@@ -7,7 +7,6 @@
         class="project-image"
         loading="lazy"
       />
-      <div class="image-overlay" />
     </div>
 
     <div class="project-content">
@@ -17,13 +16,13 @@
         <p v-if="project.date" class="project-date">{{ project.date }}</p>
       </div>
 
-      <div class="scroll-area">
-        <p class="project-description">{{ project.description }}</p>
+      <p class="project-description">{{ project.description }}</p>
 
-        <p class="tech-stack-text">
-          <span class="label">Tech stack:</span> {{ project.tech?.join(", ") }}
-        </p>
+      <p class="tech-stack-text">
+        <span class="label">Tech stack:</span> {{ project.tech?.join(", ") }}
+      </p>
 
+      <div class="project-details">
         <div v-if="project.roles?.length" class="project-list-block">
           <h4 class="list-title">Roles & Responsibilities</h4>
           <ul class="custom-list">
@@ -66,28 +65,29 @@ defineProps({
 
 <style scoped>
 .project-card {
+  display: grid;
+  grid-template-columns: minmax(0, 40%) 1fr;
+  gap: var(--space-10);
+  width: 100%;
+  height: 100%;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   border: var(--border-subtle);
-  transition:
-    transform var(--duration-base) var(--easing-standard),
-    border-color var(--duration-base) var(--easing-standard);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 37.5rem;
+  overflow: hidden;
+  padding: var(--space-6);
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--color-primary);
+@media (max-width: 900px) {
+  .project-card {
+    grid-template-columns: 1fr;
+  }
 }
 
 .image-wrapper {
   position: relative;
-  height: 180px;
+  border-radius: var(--radius-md);
   overflow: hidden;
+  aspect-ratio: 4 / 3;
 }
 
 .project-image {
@@ -96,21 +96,10 @@ defineProps({
   object-fit: cover;
 }
 
-.image-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to top, var(--color-surface), transparent);
-}
-
 .project-content {
-  padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  flex: 1;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .header-meta {
@@ -118,58 +107,55 @@ defineProps({
 }
 
 .project-title {
-  font-size: 1.4rem;
+  font-size: 1.75rem;
   color: var(--color-white);
   margin: 0;
 }
 
 .project-company {
   color: var(--color-primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: var(--font-weight-medium);
   margin-top: var(--space-1);
 }
 
 .project-date {
   color: var(--color-text-muted);
-  font-size: 0.8rem;
-}
-
-.scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: var(--space-2);
-  margin-bottom: var(--space-4);
-}
-
-.scroll-area::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-.scroll-area::-webkit-scrollbar-thumb {
-  background: var(--color-surface-muted);
-  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
 }
 
 .project-description {
   color: var(--color-text-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.7;
   margin-bottom: var(--space-5);
 }
 
 .tech-stack-text {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text);
   background: rgba(var(--color-white-rgb), 0.03);
-  padding: var(--space-2);
+  padding: var(--space-3);
   border-radius: var(--radius-sm);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 
 .label {
   font-weight: bold;
   color: var(--color-white);
+}
+
+.project-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-5);
+}
+
+@media (max-width: 640px) {
+  .project-details {
+    grid-template-columns: 1fr;
+  }
 }
 
 .list-title {
@@ -182,7 +168,7 @@ defineProps({
 
 .custom-list {
   padding-left: 1.2rem;
-  margin: 0 0 var(--space-4) 0;
+  margin: 0;
   color: var(--color-text-muted);
   font-size: 0.85rem;
 }
@@ -195,6 +181,7 @@ defineProps({
   display: flex;
   gap: var(--space-4);
   padding-top: var(--space-4);
+  margin-top: auto;
   border-top: 1px solid var(--color-surface-muted);
 }
 

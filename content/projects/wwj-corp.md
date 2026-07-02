@@ -11,7 +11,7 @@ tech:
   - "Nuxt.js"
 description: "A platform designed to simplify booking and reservations for office desks, rooms, and shared spaces, accessible via both web and mobile devices for easy workspace management."
 roles:
-  - "Building and fixing features across Laravel, Nuxt.js, and Flutter in a Dockerized environment."
+  - "Built and fixed features across Laravel, Nuxt.js, and Flutter in Docker."
 achievements:
   - "Improved SEO performance by 40%."
   - "Resolved 98% of critical bugs."

@@ -9,9 +9,9 @@ tech:
   - "PHP"
 description: "A platform that provides web hosting services and maintains acquired company services, including a CRM for customers to browse products on the platform."
 roles:
-  - "Developed PHP scripts for new product integrations."
-  - "Verified newly migrated data in development environments."
-  - "Created scripts to automate core platform workflows."
+  - "Built PHP scripts for new product integrations."
+  - "Validated migrated data in development environments."
+  - "Automated recurring platform workflows with custom scripts."
 achievements:
   - "Delivered multiple automation scripts that reduced manual operational effort."
 display: "false"

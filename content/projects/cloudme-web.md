@@ -9,10 +9,10 @@ tech:
   - "Native Android"
 description: "A cloud-based POS application built with Laravel for businesses in the Middle East region, focused on simplified accounting and operations."
 roles:
-  - "Developed REST APIs and backend features in Laravel."
-  - "Managed client calls, support tickets, and product releases."
-  - "Migrated the product from third-party hosts to Azure cloud."
-  - "Maintained production servers and configurations."
+  - "Built REST APIs and backend features in Laravel."
+  - "Handled client communication, support tickets, and release coordination."
+  - "Migrated the platform from third-party hosting to Azure."
+  - "Maintained production servers, configurations, and stability."
 achievements: []
 display: "false"
 ---
