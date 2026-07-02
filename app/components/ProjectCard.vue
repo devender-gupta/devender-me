@@ -1,7 +1,18 @@
 <template>
   <div class="project-card">
     <header class="header-meta">
-      <p v-if="project.date" class="project-date">{{ project.date }}</p>
+      <div class="meta-row">
+        <p v-if="project.date" class="project-date">{{ project.date }}</p>
+        <a
+          v-if="project.preview_link"
+          :href="project.preview_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-btn preview top-preview"
+        >
+          <span>Live Preview</span>
+        </a>
+      </div>
       <h3 class="project-title">{{ project.title }}</h3>
       <p v-if="project.company" class="project-company">{{ project.company }}</p>
     </header>
@@ -33,23 +44,8 @@
       </div>
     </div>
 
-    <div class="project-links">
-      <a
-        v-if="project.preview_link"
-        :href="project.preview_link"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn preview"
-      >
-        <span>Live Preview</span>
-      </a>
-      <a
-        v-if="project.repo_link"
-        :href="project.repo_link"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-btn code"
-      >
+    <div v-if="project.repo_link" class="project-links">
+      <a :href="project.repo_link" target="_blank" rel="noopener noreferrer" class="link-btn code">
         <span>View Code</span>
       </a>
     </div>
@@ -83,6 +79,13 @@ defineProps({
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+}
+
+.meta-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
 .project-title {
@@ -188,14 +191,16 @@ defineProps({
 
 .project-links {
   display: flex;
-  gap: var(--space-3);
+  justify-content: flex-start;
   padding-top: var(--space-3);
   margin-top: auto;
   border-top: 1px solid var(--color-surface-muted);
 }
 
 .link-btn {
-  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: var(--space-3);
   border-radius: var(--radius-md);
@@ -219,5 +224,26 @@ defineProps({
 .link-btn.preview {
   background: var(--gradient-brand);
   border-color: transparent;
+}
+
+.top-preview {
+  flex: 0 0 auto;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.project-links .link-btn {
+  min-width: 8rem;
+}
+
+@media (max-width: 640px) {
+  .meta-row {
+    flex-wrap: wrap;
+  }
+
+  .top-preview {
+    width: auto;
+  }
 }
 </style>
