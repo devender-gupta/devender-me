@@ -19,7 +19,7 @@ certifications:
     issuer: "Scrum Alliance"
     date: "07/2026"
     badge: "/csm-badge.png"
-    credential_url: "https://badgecert.com/bc/html/groupbadges.html?k=WUUzNmRhc01RajE4TzhlcE9EbHRFRGs0cTkybW0yb2Q"
+    credential_url: "https://bcert.me/svwrpchnw"
 tech_stack:
 - name: "Laravel"
     icon: "logos:laravel"
