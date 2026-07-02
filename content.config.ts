@@ -46,6 +46,17 @@ export default defineContentConfig({
             date: z.string()
           })
         ),
+        certifications: z
+          .array(
+            z.object({
+              name: z.string(),
+              issuer: z.string(),
+              date: z.string(),
+              badge: z.string().optional(),
+              credential_url: z.string().url().optional()
+            })
+          )
+          .optional(),
         tech_stack: z
           .array(
             z.object({

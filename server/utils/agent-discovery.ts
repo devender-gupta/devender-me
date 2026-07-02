@@ -1,6 +1,6 @@
 export const siteProfile = {
   name: "Devender Gupta",
-  designation: "Full Stack Engineer",
+  designation: "Senior Software Engineer",
   location: "Kochi, Kerala, India",
   website: "https://devendergupta.com",
   summary:

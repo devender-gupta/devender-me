@@ -1,7 +1,7 @@
 ---
 id: "1"
 title: "CloudMe Web"
-company: "QBurst Technologies"
+company: "CloudMe Software Solution"
 date: "Dec 2018 - Aug 2019"
 tech:
   - "Azure"
@@ -9,10 +9,11 @@ tech:
   - "Native Android"
 description: "A cloud-based POS application built with Laravel for businesses in the Middle East region, focused on simplified accounting and operations."
 roles:
-  - "Developed REST APIs and backend features in Laravel."
-  - "Managed client calls, support tickets, and product releases."
-  - "Migrated the product from third-party hosts to Azure cloud."
-  - "Maintained production servers and configurations."
-achievements: []
-display: "false"
+  - "Built REST APIs and backend features in Laravel."
+  - "Handled client communication, support tickets, and release coordination."
+  - "Migrated the platform from third-party hosting to Azure."
+  - "Maintained production servers, configurations, and stability."
+achievements:
+  - "Successfully migrated and onboarded nearly 10 existing customers to the new platform."
+display: "true"
 ---

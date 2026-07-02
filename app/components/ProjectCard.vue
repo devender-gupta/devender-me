@@ -1,59 +1,53 @@
 <template>
   <div class="project-card">
-    <div class="image-wrapper">
-      <NuxtImg
-        :src="'/project-placeholder.webp'"
-        :alt="project.title"
-        class="project-image"
-        loading="lazy"
-      />
-      <div class="image-overlay" />
-    </div>
-
-    <div class="project-content">
-      <div class="header-meta">
-        <h3 class="project-title">{{ project.title }}</h3>
-        <p v-if="project.company" class="project-company">{{ project.company }}</p>
+    <header class="header-meta">
+      <div class="meta-row">
         <p v-if="project.date" class="project-date">{{ project.date }}</p>
-      </div>
-
-      <div class="scroll-area">
-        <p class="project-description">{{ project.description }}</p>
-
-        <p class="tech-stack-text">
-          <span class="label">Tech stack:</span> {{ project.tech?.join(", ") }}
-        </p>
-
-        <div v-if="project.roles?.length" class="project-list-block">
-          <h4 class="list-title">Roles & Responsibilities</h4>
-          <ul class="custom-list">
-            <li v-for="role in project.roles" :key="role">{{ role }}</li>
-          </ul>
-        </div>
-
-        <div v-if="project.achievements?.length" class="project-list-block">
-          <h4 class="list-title">Achievements</h4>
-          <ul class="custom-list success">
-            <li v-for="achievement in project.achievements" :key="achievement">
-              {{ achievement }}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="project-links">
         <a
           v-if="project.preview_link"
           :href="project.preview_link"
           target="_blank"
-          class="link-btn preview"
+          rel="noopener noreferrer"
+          class="link-btn preview top-preview"
         >
           <span>Live Preview</span>
         </a>
-        <a v-if="project.repo_link" :href="project.repo_link" target="_blank" class="link-btn code">
-          <span>View Code</span>
-        </a>
       </div>
+      <h3 class="project-title">{{ project.title }}</h3>
+      <p v-if="project.company" class="project-company">{{ project.company }}</p>
+    </header>
+
+    <p class="project-description">{{ project.description }}</p>
+
+    <div v-if="project.tech?.length" class="tech-stack">
+      <h4 class="section-title">Tech Stack</h4>
+      <ul class="tech-list">
+        <li v-for="tech in project.tech" :key="tech" class="tech-pill">{{ tech }}</li>
+      </ul>
+    </div>
+
+    <div class="project-details">
+      <div v-if="project.roles?.length" class="project-list-block">
+        <h4 class="section-title">Roles & Responsibilities</h4>
+        <ul class="custom-list">
+          <li v-for="role in project.roles" :key="role">{{ role }}</li>
+        </ul>
+      </div>
+
+      <div v-if="project.achievements?.length" class="project-list-block">
+        <h4 class="section-title">Achievements</h4>
+        <ul class="custom-list success">
+          <li v-for="achievement in project.achievements" :key="achievement">
+            {{ achievement }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div v-if="project.repo_link" class="project-links">
+      <a :href="project.repo_link" target="_blank" rel="noopener noreferrer" class="link-btn code">
+        <span>View Code</span>
+      </a>
     </div>
   </div>
 </template>
@@ -66,156 +60,190 @@ defineProps({
 
 <style scoped>
 .project-card {
-  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(var(--color-white-rgb), 0.03) 0%, transparent 35%),
+    var(--color-surface);
   border-radius: var(--radius-lg);
+  border: var(--border-strong);
   overflow: hidden;
-  border: var(--border-subtle);
-  transition:
-    transform var(--duration-base) var(--easing-standard),
-    border-color var(--duration-base) var(--easing-standard);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 37.5rem;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--color-primary);
-}
-
-.image-wrapper {
-  position: relative;
-  height: 180px;
-  overflow: hidden;
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.image-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to top, var(--color-surface), transparent);
-}
-
-.project-content {
   padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .header-meta {
-  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.meta-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
 .project-title {
-  font-size: 1.4rem;
+  font-size: clamp(1.4rem, 1rem + 1vw, 1.85rem);
+  line-height: 1.2;
   color: var(--color-white);
   margin: 0;
 }
 
 .project-company {
-  color: var(--color-primary);
-  font-size: 0.9rem;
+  color: var(--color-heading);
+  font-size: 0.92rem;
   font-weight: var(--font-weight-medium);
-  margin-top: var(--space-1);
+  margin: 0;
 }
 
 .project-date {
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
-}
-
-.scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: var(--space-2);
-  margin-bottom: var(--space-4);
-}
-
-.scroll-area::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-.scroll-area::-webkit-scrollbar-thumb {
-  background: var(--color-surface-muted);
+  align-self: flex-start;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-pill);
+  background: rgba(19, 176, 245, 0.12);
 }
 
 .project-description {
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  margin-bottom: var(--space-5);
-}
-
-.tech-stack-text {
-  font-size: 0.75rem;
   color: var(--color-text);
-  background: rgba(var(--color-white-rgb), 0.03);
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-4);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
-.label {
-  font-weight: bold;
+.tech-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-pill {
   color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-subtle);
+  background: rgba(var(--color-white-rgb), 0.05);
 }
 
-.list-title {
-  font-size: 0.85rem;
+.project-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+@media (max-width: 640px) {
+  .project-card {
+    padding: var(--space-5);
+    gap: var(--space-4);
+  }
+
+  .project-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  font-size: 0.72rem;
   color: var(--color-heading);
-  margin-bottom: var(--space-2);
+  margin: 0 0 var(--space-2) 0;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.08em;
 }
 
 .custom-list {
-  padding-left: 1.2rem;
-  margin: 0 0 var(--space-4) 0;
-  color: var(--color-text-muted);
-  font-size: 0.85rem;
+  padding-left: 1.05rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.86rem;
+  line-height: 1.55;
 }
 
 .custom-list li {
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.success li::marker {
+  color: var(--color-primary);
 }
 
 .project-links {
   display: flex;
-  gap: var(--space-4);
-  padding-top: var(--space-4);
+  justify-content: flex-start;
+  padding-top: var(--space-3);
+  margin-top: auto;
   border-top: 1px solid var(--color-surface-muted);
 }
 
 .link-btn {
-  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: var(--space-2);
+  padding: var(--space-3);
   border-radius: var(--radius-md);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: var(--font-weight-medium);
-  transition: all var(--duration-fast) var(--easing-standard);
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    background var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard);
   color: var(--color-white);
   background: var(--color-surface-muted);
+  border: var(--border-subtle);
 }
 
 .link-btn:hover {
   background: var(--color-surface-soft);
+  transform: translateY(-1px);
 }
 
 .link-btn.preview {
   background: var(--gradient-brand);
+  border-color: transparent;
+}
+
+.top-preview {
+  flex: 0 0 auto;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.project-links .link-btn {
+  min-width: 8rem;
+}
+
+@media (max-width: 640px) {
+  .meta-row {
+    flex-wrap: wrap;
+  }
+
+  .top-preview {
+    width: auto;
+  }
 }
 </style>

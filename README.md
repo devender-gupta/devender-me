@@ -19,6 +19,9 @@ Live at **[devendergupta.com](https://devendergupta.com)**. Content is driven en
 
 - Content-driven portfolio: user profile, work history, and projects all sourced from Markdown
 - Responsive single-page layout with smooth anchor navigation and active section tracking
+- Featured projects carousel with keyboard/swipe navigation and status-aware controls
+- Project cards optimized for readability (no placeholder image, top-corner live preview action)
+- Featured projects sorted latest-first using parsed project date ranges
 - Dark/light color mode with instant theme switching
 - AI chat assistant powered by GitHub Models (`gpt-4o-mini`) via a Nuxt server API route
 - Agent/AI discoverability: `ai.txt`, OpenAPI spec, `.well-known/api-catalog`, `Content-Signal` headers, and a WebMCP client plugin
@@ -61,10 +64,12 @@ nuxt.config.ts         # Modules, head/meta, routeRules, runtimeConfig, color-mo
 
 ## Prerequisites
 
-- **Node.js 20+** (Node 22 recommended — required by `eslint-flat-config-utils`)
+- **Node.js 20+** (Node 22+ recommended)
 - **npm 10+**
 
 Nuxt Content uses `better-sqlite3`, which requires native module compilation. Ensure your environment can build native Node addons (Xcode CLT on macOS, `build-essential` on Linux).
+
+Note: this repo includes a temporary `Object.groupBy` polyfill in `eslint.config.mjs` so linting can run on Node 20 as well.
 
 ## Getting Started
 
@@ -108,13 +113,13 @@ Schemas are defined and validated in `content.config.ts` using Zod.
 | ---------------------------------------------------- | ------------ | -------- |
 | `name`                                               | string       | ✓        |
 | `email`                                              | email string | ✓        |
-| `phone`                                              | string       | ✓        |
 | `designation`                                        | string       | ✓        |
 | `introduction`                                       | string       | ✓        |
 | `summary`                                            | string       | ✓        |
 | `brand.first`, `brand.last`                          | string       | ✓        |
 | `github_link`, `linkedin_link`, `stackoverflow_link` | URL          | ✓        |
 | `education[].institution`, `.degree`, `.date`        | string       | ✓        |
+| `certifications[]`                                   | object[]     | optional |
 | `tech_stack[].name`, `.icon`                         | string       | optional |
 
 ### `experiences` collection — `content/experiences/*.md`
@@ -173,6 +178,7 @@ Notes:
 
 - Home page currently renders projects where `display == "true"`.
 - Keep `display` as string `"true"` for featured projects.
+- Project ordering is computed in the UI from each project's `date` range and shown latest first.
 
 ### `experiences` collection (`content/experiences/*.md`)
 
@@ -185,9 +191,10 @@ Required fields:
 This codebase uses Nuxt Content v3 query APIs in `script setup`:
 
 ```ts
-const { data } = await useAsyncData("projects", () =>
-  queryCollection("projects").order("id", "DESC").all()
-)
+const { data: projects } = await useAsyncData("projects", async () => {
+  const items = await queryCollection("projects").where("display", "==", "true").all()
+  return [...items].sort((a, b) => getProjectSortValue(b) - getProjectSortValue(a))
+})
 ```
 
 Use `queryCollection(...)` APIs for content queries.

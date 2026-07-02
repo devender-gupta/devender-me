@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     const user: UserCollectionItem | null = userArr[0] ?? null
 
     const name = user?.name ?? "Devender Gupta"
-    const designation = user?.designation ?? "Full Stack Engineer"
+    const designation = user?.designation ?? "Senior Software Engineer"
     const summary = user?.summary ?? ""
 
     const email = user?.email ?? ""

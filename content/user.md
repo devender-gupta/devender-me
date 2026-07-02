@@ -1,9 +1,15 @@
 ---
 name: "Devender Gupta"
 email: "devender.gupta.me@gmail.com"
-designation: "Full Stack Engineer"
+designation: "Senior Software Engineer"
 introduction: "I build scalable web ecosystems."
-summary: "Lead Full-Stack Engineer with 7+ years of experience building, scaling, and maintaining production-grade SaaS platforms and high-traffic web applications used by thousands of real users."
+summary: >
+  Senior Software Engineer with 7+ years of experience designing,
+  building, and scaling production-grade SaaS platforms,
+  distributed systems, and high-performance APIs.
+  Passionate about system design, cloud-native architecture,
+  microservices, and delivering reliable software that creates
+  measurable business value.
 brand:
   first: "devender"
   last: "gupta"
@@ -14,6 +20,12 @@ education:
   - degree: "Bachelor in Computer Science"
     institution: "Toc-H Institute of Science and Technology"
     date: "2013 - 2017"
+certifications:
+  - name: "Certified ScrumMaster (CSM)"
+    issuer: "Scrum Alliance"
+    date: "July 2026"
+    badge: "/csm-badge.png"
+    credential_url: "https://bcert.me/svwrpchnw"
 tech_stack:
 - name: "Laravel"
     icon: "logos:laravel"
