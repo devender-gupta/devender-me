@@ -14,6 +14,12 @@ education:
   - degree: "Bachelor in Computer Science"
     institution: "Toc-H Institute of Science and Technology"
     date: "2013 - 2017"
+certifications:
+  - name: "Certified ScrumMaster (CSM)"
+    issuer: "Scrum Alliance"
+    date: "07/2026"
+    badge: "/csm-badge.png"
+    credential_url: "https://badgecert.com/bc/html/groupbadges.html?k=WUUzNmRhc01RajE4TzhlcE9EbHRFRGs0cTkybW0yb2Q"
 tech_stack:
 - name: "Laravel"
     icon: "logos:laravel"

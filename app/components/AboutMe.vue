@@ -46,6 +46,38 @@
         </div>
       </div>
     </section>
+
+    <section v-if="user.certifications?.length" class="section-block">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certifications-grid">
+        <a
+          v-for="cert in user.certifications"
+          :key="cert.name"
+          class="certification-card"
+          :class="{ 'is-link': cert.credential_url }"
+          :href="cert.credential_url"
+          :target="cert.credential_url ? '_blank' : undefined"
+          :rel="cert.credential_url ? 'noopener noreferrer' : undefined"
+        >
+          <img
+            v-if="cert.badge"
+            :src="cert.badge"
+            :alt="`${cert.name} badge`"
+            class="certification-badge"
+            width="64"
+            height="64"
+            loading="lazy"
+          >
+          <div class="certification-info">
+            <h3 class="item-title">{{ cert.name }}</h3>
+            <div class="timeline-meta">
+              <span> <Icon name="uil:building" /> {{ cert.issuer }} </span>
+              <span> <Icon name="uil:calendar-alt" /> {{ cert.date }} </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -138,5 +170,43 @@ const showEducation = false
 
 .resume-button {
   margin-top: var(--space-8);
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-4);
+}
+
+.certification-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: var(--border-subtle);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--duration-base) var(--easing-standard);
+}
+
+.certification-card.is-link:hover,
+.certification-card.is-link:focus-visible {
+  border-color: var(--color-primary);
+}
+
+.certification-badge {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.certification-info .item-title {
+  margin-bottom: var(--space-1);
+}
+
+.certification-info .timeline-meta {
+  margin: 0;
 }
 </style>
