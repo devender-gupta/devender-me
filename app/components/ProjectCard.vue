@@ -1,58 +1,47 @@
 <template>
   <div class="project-card">
-    <div class="image-wrapper">
-      <NuxtImg
-        :src="'/project-placeholder.webp'"
-        :alt="project.title"
-        class="project-image"
-        loading="lazy"
-      />
+    <div class="header-meta">
+      <h3 class="project-title">{{ project.title }}</h3>
+      <p v-if="project.company" class="project-company">{{ project.company }}</p>
+      <p v-if="project.date" class="project-date">{{ project.date }}</p>
     </div>
 
-    <div class="project-content">
-      <div class="header-meta">
-        <h3 class="project-title">{{ project.title }}</h3>
-        <p v-if="project.company" class="project-company">{{ project.company }}</p>
-        <p v-if="project.date" class="project-date">{{ project.date }}</p>
+    <p class="project-description">{{ project.description }}</p>
+
+    <p class="tech-stack-text">
+      <span class="label">Tech stack:</span> {{ project.tech?.join(", ") }}
+    </p>
+
+    <div class="project-details">
+      <div v-if="project.roles?.length" class="project-list-block">
+        <h4 class="list-title">Roles & Responsibilities</h4>
+        <ul class="custom-list">
+          <li v-for="role in project.roles" :key="role">{{ role }}</li>
+        </ul>
       </div>
 
-      <p class="project-description">{{ project.description }}</p>
-
-      <p class="tech-stack-text">
-        <span class="label">Tech stack:</span> {{ project.tech?.join(", ") }}
-      </p>
-
-      <div class="project-details">
-        <div v-if="project.roles?.length" class="project-list-block">
-          <h4 class="list-title">Roles & Responsibilities</h4>
-          <ul class="custom-list">
-            <li v-for="role in project.roles" :key="role">{{ role }}</li>
-          </ul>
-        </div>
-
-        <div v-if="project.achievements?.length" class="project-list-block">
-          <h4 class="list-title">Achievements</h4>
-          <ul class="custom-list success">
-            <li v-for="achievement in project.achievements" :key="achievement">
-              {{ achievement }}
-            </li>
-          </ul>
-        </div>
+      <div v-if="project.achievements?.length" class="project-list-block">
+        <h4 class="list-title">Achievements</h4>
+        <ul class="custom-list success">
+          <li v-for="achievement in project.achievements" :key="achievement">
+            {{ achievement }}
+          </li>
+        </ul>
       </div>
+    </div>
 
-      <div class="project-links">
-        <a
-          v-if="project.preview_link"
-          :href="project.preview_link"
-          target="_blank"
-          class="link-btn preview"
-        >
-          <span>Live Preview</span>
-        </a>
-        <a v-if="project.repo_link" :href="project.repo_link" target="_blank" class="link-btn code">
-          <span>View Code</span>
-        </a>
-      </div>
+    <div class="project-links">
+      <a
+        v-if="project.preview_link"
+        :href="project.preview_link"
+        target="_blank"
+        class="link-btn preview"
+      >
+        <span>Live Preview</span>
+      </a>
+      <a v-if="project.repo_link" :href="project.repo_link" target="_blank" class="link-btn code">
+        <span>View Code</span>
+      </a>
     </div>
   </div>
 </template>
@@ -65,45 +54,21 @@ defineProps({
 
 <style scoped>
 .project-card {
-  display: grid;
-  grid-template-columns: minmax(0, 40%) 1fr;
-  gap: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
   width: 100%;
   height: 100%;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: var(--border-subtle);
   overflow: hidden;
-  padding: var(--space-6);
-}
-
-@media (max-width: 900px) {
-  .project-card {
-    grid-template-columns: 1fr;
-  }
-}
-
-.image-wrapper {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-}
-
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-content {
-  display: flex;
-  flex-direction: column;
+  padding: var(--space-5);
   min-width: 0;
 }
 
 .header-meta {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
 .project-title {
@@ -127,8 +92,7 @@ defineProps({
 .project-description {
   color: var(--color-text-muted);
   font-size: 0.95rem;
-  line-height: 1.7;
-  margin-bottom: var(--space-5);
+  line-height: 1.6;
 }
 
 .tech-stack-text {
@@ -137,7 +101,7 @@ defineProps({
   background: rgba(var(--color-white-rgb), 0.03);
   padding: var(--space-3);
   border-radius: var(--radius-sm);
-  margin-bottom: var(--space-5);
+  margin: 0;
 }
 
 .label {
@@ -148,8 +112,7 @@ defineProps({
 .project-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
-  margin-bottom: var(--space-5);
+  gap: var(--space-4);
 }
 
 @media (max-width: 640px) {
@@ -174,13 +137,13 @@ defineProps({
 }
 
 .custom-list li {
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 .project-links {
   display: flex;
-  gap: var(--space-4);
-  padding-top: var(--space-4);
+  gap: var(--space-3);
+  padding-top: var(--space-3);
   margin-top: auto;
   border-top: 1px solid var(--color-surface-muted);
 }

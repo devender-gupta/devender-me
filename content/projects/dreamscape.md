@@ -1,7 +1,7 @@
 ---
 id: "4"
 title: "Dreamscape Platform '18"
-company: "Dreamscape Networks"
+company: "QBurst Technologies"
 date: "Mar 2022 - Oct 2022"
 tech:
   - "Git"
@@ -14,5 +14,5 @@ roles:
   - "Automated recurring platform workflows with custom scripts."
 achievements:
   - "Delivered multiple automation scripts that reduced manual operational effort."
-display: "false"
+display: "true"
 ---

@@ -12,5 +12,5 @@ roles:
   - "Built custom plugins and integrated new pages."
   - "Managed releases across all environments."
 achievements: []
-display: "false"
+display: "true"
 ---

@@ -1,7 +1,7 @@
 ---
 id: "3"
 title: "MeetClinics"
-company: "QBurst Technologies"
+company: "Floges Software Solutions (P) Ltd"
 date: "Apr 2020 - Aug 2021"
 tech:
   - "AWS"

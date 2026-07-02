@@ -1,7 +1,7 @@
 ---
 id: "1"
 title: "CloudMe Web"
-company: "QBurst Technologies"
+company: "CloudMe Software Solution"
 date: "Dec 2018 - Aug 2019"
 tech:
   - "Azure"
@@ -14,5 +14,5 @@ roles:
   - "Migrated the platform from third-party hosting to Azure."
   - "Maintained production servers, configurations, and stability."
 achievements: []
-display: "false"
+display: "true"
 ---

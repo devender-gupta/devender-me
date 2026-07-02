@@ -11,5 +11,5 @@ roles:
   - "Resolved bugs and built REST APIs."
   - "Deployed code changes and coordinated releases."
 achievements: []
-display: "false"
+display: "true"
 ---

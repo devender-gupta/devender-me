@@ -66,9 +66,56 @@
 </template>
 
 <script setup>
-const { data: projects } = await useAsyncData("projects", () =>
-  queryCollection("projects").where("display", "==", "true").order("id", "DESC").all()
-)
+const monthMap = {
+  jan: 0,
+  feb: 1,
+  mar: 2,
+  apr: 3,
+  may: 4,
+  jun: 5,
+  jul: 6,
+  aug: 7,
+  sep: 8,
+  oct: 9,
+  nov: 10,
+  dec: 11
+}
+
+function parseDatePart(datePart) {
+  if (!datePart) return null
+
+  const normalized = datePart.trim().toLowerCase()
+  if (["present", "current", "now", "ongoing"].includes(normalized)) {
+    return Number.POSITIVE_INFINITY
+  }
+
+  const monthYearMatch = normalized.match(/^([a-z]{3,9})\s+(\d{4})$/)
+  if (monthYearMatch) {
+    const month = monthMap[monthYearMatch[1].slice(0, 3)]
+    const year = Number(monthYearMatch[2])
+    if (month !== undefined) {
+      return Date.UTC(year, month, 1)
+    }
+  }
+
+  const yearMatch = normalized.match(/^(\d{4})$/)
+  if (yearMatch) {
+    return Date.UTC(Number(yearMatch[1]), 0, 1)
+  }
+
+  return null
+}
+
+function getProjectSortValue(project) {
+  const dateRange = project.date ?? ""
+  const [startPart, endPart] = dateRange.split(" - ").map((item) => item.trim())
+  return parseDatePart(endPart) ?? parseDatePart(startPart) ?? 0
+}
+
+const { data: projects } = await useAsyncData("projects", async () => {
+  const items = await queryCollection("projects").where("display", "==", "true").all()
+  return [...items].sort((a, b) => getProjectSortValue(b) - getProjectSortValue(a))
+})
 
 const activeIndex = ref(0)
 const activeProject = computed(() => projects.value?.[activeIndex.value])

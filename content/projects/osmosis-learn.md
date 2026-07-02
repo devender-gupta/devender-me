@@ -1,7 +1,7 @@
 ---
 id: "2"
 title: "Osmosis Learn"
-company: "QBurst Technologies"
+company: "Floges Software Solutions (P) Ltd"
 date: "Sep 2019 - Dec 2021"
 preview_link: "https://osmosislearn.com"
 tech:
