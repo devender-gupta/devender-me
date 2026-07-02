@@ -21,7 +21,7 @@ roles:
   - "Designed database models and platform architecture."
   - "Built REST APIs in Laravel and AWS Lambda with Node.js."
 achievements:
-  - "Successfully launched the platform and generated first-year revenue."
-  - "Onboarded 3 to 4 institutional clients within the first year."
+  - "Successfully launched the platform and generated revenue in the first year."
+  - "Onboarded 3-4 institutional clients within the first year."
 display: "true"
 ---

@@ -10,6 +10,9 @@ description: "An app that enables restaurant owners and chefs to order supplies 
 roles:
   - "Resolved bugs and built REST APIs."
   - "Deployed code changes and coordinated releases."
-achievements: []
+  - "Implemented feature enhancements across ordering and inventory workflows."
+  - "Collaborated with frontend and product teams to deliver stable user-facing updates."
+achievements:
+  - "Delivered 100% of assigned tasks and resolved all reported bugs."
 display: "true"
 ---

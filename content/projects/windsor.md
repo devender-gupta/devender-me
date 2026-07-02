@@ -11,6 +11,8 @@ description: "A WordPress site that simplifies apartment hunting by offering eas
 roles:
   - "Built custom plugins and integrated new pages."
   - "Managed releases across all environments."
+  - "Implemented WordPress content and layout updates based on business requirements."
+  - "Maintained plugin compatibility, performance, and site stability during updates."
 achievements: []
 display: "true"
 ---

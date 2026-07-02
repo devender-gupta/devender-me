@@ -12,7 +12,8 @@ roles:
   - "Built PHP scripts for new product integrations."
   - "Validated migrated data in development environments."
   - "Automated recurring platform workflows with custom scripts."
+  - "Investigated and resolved integration issues during platform updates."
 achievements:
-  - "Delivered multiple automation scripts that reduced manual operational effort."
+  - "Delivered multiple automation scripts that significantly reduced manual operational effort."
 display: "true"
 ---

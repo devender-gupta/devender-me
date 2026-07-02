@@ -14,6 +14,8 @@
       aria-label="Featured projects"
       @keydown.left="goPrev"
       @keydown.right="goNext"
+      @keydown.home.prevent="goTo(0)"
+      @keydown.end.prevent="goTo(lastIndex)"
       @touchstart="onTouchStart"
       @touchend="onTouchEnd"
     >
@@ -30,36 +32,38 @@
         </div>
       </div>
 
-      <button
-        v-if="projects.length > 1"
-        class="carousel-arrow prev"
-        type="button"
-        aria-label="Previous project"
-        @click="goPrev"
-      >
-        <Icon name="uil:angle-left-b" />
-      </button>
-      <button
-        v-if="projects.length > 1"
-        class="carousel-arrow next"
-        type="button"
-        aria-label="Next project"
-        @click="goNext"
-      >
-        <Icon name="uil:angle-right-b" />
-      </button>
+      <div v-if="projects.length > 1" class="carousel-controls">
+        <p class="carousel-status" aria-live="polite">
+          {{ activeIndex + 1 }} / {{ projects.length }}
+        </p>
 
-      <div v-if="projects.length > 1" class="carousel-dots">
-        <button
-          v-for="(project, index) in projects"
-          :key="project.path"
-          type="button"
-          class="dot"
-          :class="{ active: index === activeIndex }"
-          :aria-label="`Go to project ${index + 1}: ${project.title}`"
-          :aria-current="index === activeIndex"
-          @click="goTo(index)"
-        />
+        <div class="carousel-dots" role="tablist" aria-label="Project slide selector">
+          <button
+            v-for="(project, index) in projects"
+            :key="project.path"
+            type="button"
+            role="tab"
+            class="dot"
+            :class="{ active: index === activeIndex }"
+            :aria-label="`Go to project ${index + 1}: ${project.title}`"
+            :aria-current="index === activeIndex"
+            @click="goTo(index)"
+          />
+        </div>
+
+        <div class="carousel-arrows">
+          <button
+            class="carousel-arrow"
+            type="button"
+            aria-label="Previous project"
+            @click="goPrev"
+          >
+            <Icon name="uil:angle-left-b" />
+          </button>
+          <button class="carousel-arrow" type="button" aria-label="Next project" @click="goNext">
+            <Icon name="uil:angle-right-b" />
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -119,6 +123,24 @@ const { data: projects } = await useAsyncData("projects", async () => {
 
 const activeIndex = ref(0)
 const activeProject = computed(() => projects.value?.[activeIndex.value])
+const lastIndex = computed(() => {
+  const total = projects.value?.length ?? 0
+  return Math.max(total - 1, 0)
+})
+
+watch(
+  () => projects.value?.length ?? 0,
+  (total) => {
+    if (!total) {
+      activeIndex.value = 0
+      return
+    }
+
+    if (activeIndex.value >= total) {
+      activeIndex.value = total - 1
+    }
+  }
+)
 
 function goTo(index) {
   const total = projects.value?.length ?? 0
@@ -154,13 +176,16 @@ function onTouchEnd(event) {
 }
 
 .carousel {
-  position: relative;
-  padding-bottom: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
   outline: none;
+  touch-action: pan-y;
 }
 
 .carousel-viewport {
   overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
 .carousel-track {
@@ -175,22 +200,52 @@ function onTouchEnd(event) {
   display: flex;
 }
 
-.carousel-arrow {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
+.carousel-controls {
   display: flex;
   align-items: center;
+  gap: var(--space-3);
+}
+
+.carousel-status {
+  margin: 0;
+  min-width: 4.25rem;
+  font-size: 0.76rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.carousel-dots {
+  flex: 1;
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.carousel-dots::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.carousel-arrow {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   border: var(--border-subtle);
   background: var(--color-surface);
   color: var(--color-white);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   cursor: pointer;
   transition:
+    transform var(--duration-fast) var(--easing-standard),
     background var(--duration-fast) var(--easing-standard),
     border-color var(--duration-fast) var(--easing-standard);
 }
@@ -198,28 +253,13 @@ function onTouchEnd(event) {
 .carousel-arrow:hover {
   background: var(--color-surface-soft);
   border-color: var(--color-primary);
-}
-
-.carousel-arrow.prev {
-  left: -1.5rem;
-}
-
-.carousel-arrow.next {
-  right: -1.5rem;
-}
-
-.carousel-dots {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: var(--space-2);
+  transform: translateY(-1px);
 }
 
 .dot {
-  width: 0.625rem;
+  width: 0.7rem;
   height: 0.625rem;
+  flex: 0 0 auto;
   border-radius: 50%;
   border: none;
   padding: 0;
@@ -230,25 +270,38 @@ function onTouchEnd(event) {
 
 .dot.active {
   background: var(--gradient-brand);
-  width: 1.5rem;
+  width: 1.35rem;
   border-radius: var(--radius-pill);
 }
 
 @media (max-width: 1024px) {
-  .carousel-arrow.prev {
-    left: 0;
+  .carousel-controls {
+    flex-wrap: wrap;
   }
 
-  .carousel-arrow.next {
-    right: 0;
+  .carousel-dots {
+    order: 3;
+    flex-basis: 100%;
   }
 }
 
 @media (max-width: 640px) {
+  .projects-section {
+    padding-block: var(--space-16);
+  }
+
+  .carousel-controls {
+    gap: var(--space-2);
+  }
+
+  .carousel-status {
+    min-width: auto;
+  }
+
   .carousel-arrow {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.1rem;
   }
 }
 </style>

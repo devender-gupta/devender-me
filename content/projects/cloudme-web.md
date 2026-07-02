@@ -13,6 +13,7 @@ roles:
   - "Handled client communication, support tickets, and release coordination."
   - "Migrated the platform from third-party hosting to Azure."
   - "Maintained production servers, configurations, and stability."
-achievements: []
+achievements:
+  - "Successfully migrated and onboarded nearly 10 existing customers to the new platform."
 display: "true"
 ---
